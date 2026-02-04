@@ -1,302 +1,245 @@
 <!DOCTYPE html>
-<html lang="uz">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>blya - Premium Restaurant</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" cblyarigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cormorant+Garamond:wght@300;400;600&display=swap"
-      rel="stylesheet"
-    />
+    <title>GameVerse - Play. Compete. Win.</title>
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-      <div class="nav-container">
-        <div class="logo">blya</div>
-        <ul class="nav-menu">
-          <li><a href="#home" class="nav-link">BOSH SAHIFA</a></li>
-          <li><a href="#about" class="nav-link">BIZ HAQIMIZDA</a></li>
-          <li><a href="#menu" class="nav-link">MENYU</a></li>
-          <li><a href="#gallery" class="nav-link">GALLEREYA</a></li>
-        </ul>
-        <button class="reserve-btn" onclick="scrollToReservation()">
-          BAND QILISH
-        </button>
-        <button class="mobile-toggle" onclick="toggleMenu()">☰</button>
-      </div>
-    </nav>
+    <header>
+      <div class="header-container">
+        <div class="logo">
+          <span class="logo-icon">⚡</span>
+          <span class="logo-text">GameVerse</span>
+        </div>
 
-    <!-- Hero Section -->
+        <div class="mobile-menu-toggle" id="mobileMenuToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <nav id="navMenu">
+          <a href="#home">Home</a>
+          <a href="#games">Games</a>
+          <a href="#top">Top Rated</a>
+          <a href="#profile">Profile</a>
+        </nav>
+
+        <div class="nav-icon" id="profileIcon" title="Profile">👤</div>
+      </div>
+    </header>
+
     <section class="hero" id="home">
       <div class="hero-content">
-        <p class="hero-subtitle">PREMIUM ITALIAN CUISINE</p>
-        <h1 class="hero-title">
-          blya<br /><span class="red">RISTORANTE</span>
-        </h1>
-        <div class="hero-divider"></div>
-        <p class="hero-description">
-          Eng yaxshi italyan taomlari va noyob atmosfera. Har bir taom - san'at
-          asari.
+        <h1>Play. Compete. Win.</h1>
+        <p>
+          Discover the ultimate gaming experience with thousands of amazing
+          games
         </p>
-        <button class="hero-btn" onclick="scrollToMenu()">
-          <span>MENYUNI KO'RISH</span>
-        </button>
-      </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="about reveal" id="about">
-      <div class="about-container">
-        <div class="about-image">
-          <img
-            src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=1000&fit=crop"
-            alt="Restaurant Interior"
-          />
-        </div>
-        <div class="about-content">
-          <h2>Bizning Hikoya</h2>
-          <div class="red-line"></div>
-          <p>
-            1985 yildan beri biz Toshkentda eng yaxshi italyan oshxonasini
-            taqdim etamiz. Har bir taom an'anaviy retseptlar va zamonaviy
-            texnologiyaning mukammal uyg'unligidir.
-          </p>
-          <p>
-            Bizning bosh oshpazimiz Milano va Rimda ta'lim olgan bo'lib,
-            o'zining ustaxonaligi bilan sizni hayratda qoldiradi. Faqat eng
-            sifatli mahsulotlar va sevgi bilan tayyorlangan taomlar.
-          </p>
-          <p>
-            blya - bu nafaqat restoran, bu his-tuyg'ular va ta'mlar sayohati.
-          </p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary" onclick="scrollToGames()">
+            Start Playing
+          </button>
+          <button class="btn">Watch Trailer</button>
         </div>
       </div>
     </section>
 
-    <!-- Menu Section -->
-    <section class="menu reveal" id="menu">
-      <div class="menu-header">
-        <h2>Bizning Menyu</h2>
-        <div class="red-line"></div>
-        <p
-          style="
-            font-size: 1.2rem;
-            color: #666;
-            max-width: 600px;
-            margin: 0 auto;
-          "
-        >
-          Eng ta'mli va sifatli taomlar
-        </p>
+    <section class="games-section" id="games">
+      <h2 class="section-title">🎮 Featured Games</h2>
+      <p class="section-subtitle">Explore our collection of amazing games</p>
+
+      <div class="filter-container">
+        <button class="filter-btn active" data-filter="all">All Games</button>
+        <button class="filter-btn" data-filter="action">Action</button>
+        <button class="filter-btn" data-filter="rpg">RPG</button>
+        <button class="filter-btn" data-filter="strategy">Strategy</button>
+        <button class="filter-btn" data-filter="sports">Sports</button>
+        <button class="filter-btn" data-filter="puzzle">Puzzle</button>
       </div>
-      <div class="menu-grid">
-        <div class="menu-item">
-          <div class="menu-item-header">
-            <h3>Pasta Carbonara</h3>
-            <span class="menu-price">85.000 so'm</span>
-          </div>
-          <p>
-            An'anaviy italyan pastasi quyultirilgan qaymoq, guanciale va
-            parmezandan tayyorlangan
-          </p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-header">
-            <h3>Beef Wellington</h3>
-            <span class="menu-price">250.000 so'm</span>
-          </div>
-          <p>
-            Premium mol go'shti xamirda pishirilgan, qo'ziqorinlar va pate bilan
-          </p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-header">
-            <h3>Risotto ai Funghi</h3>
-            <span class="menu-price">95.000 so'm</span>
-          </div>
-          <p>
-            O'rmon qo'ziqorinlari va truffle moyi bilan tayyorlangan kremsi
-            risotto
-          </p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-header">
-            <h3>Osso Buco</h3>
-            <span class="menu-price">180.000 so'm</span>
-          </div>
-          <p>
-            Sekin pishirilgan dana go'shti, sabzavotlar va zafronda dimlab
-            tayyorlangan
-          </p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-header">
-            <h3>Tiramisu Classico</h3>
-            <span class="menu-price">45.000 so'm</span>
-          </div>
-          <p>An'anaviy italyan deserti maskarpone va qahva bilan</p>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-header">
-            <h3>Bruschetta Trio</h3>
-            <span class="menu-price">55.000 so'm</span>
-          </div>
-          <p>Uch xil sous bilan qovurilgan non: pomidor, qo'ziqorin va losos</p>
-        </div>
+
+      <div class="games-grid" id="gamesGrid"></div>
+    </section>
+
+    <section class="games-section" id="top">
+      <div class="top-games">
+        <h3>🏆 Top 10 Trending Games</h3>
+        <div class="top-games-list" id="topGamesList"></div>
       </div>
     </section>
 
-    <!-- Gallery Section -->
-    <section class="gallery reveal" id="gallery">
-      <div class="gallery-header">
-        <h2>Gallereya</h2>
-        <div class="red-line"></div>
-      </div>
-      <div class="gallery-grid">
-        <div class="gallery-item">
-          <img
-            src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&h=600&fit=crop"
-            alt="Dish 1"
-          />
+    <div class="modal" id="gameModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="modalGameTitle">Game Title</h2>
+          <button class="modal-close" onclick="closeModal()">✕</button>
         </div>
-        <div class="gallery-item">
-          <img
-            src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&h=600&fit=crop"
-            alt="Dish 2"
-          />
-        </div>
-        <div class="gallery-item">
-          <img
-            src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&h=600&fit=crop"
-            alt="Dish 3"
-          />
-        </div>
-        <div class="gallery-item">
-          <img
-            src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=600&fit=crop"
-            alt="Dish 4"
-          />
-        </div>
-        <div class="gallery-item">
-          <img
-            src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&h=600&fit=crop"
-            alt="Dish 5"
-          />
-        </div>
-        <div class="gallery-item">
-          <img
-            src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=600&h=600&fit=crop"
-            alt="Dish 6"
-          />
-        </div>
-        <div class="gallery-item">
-          <img
-            src="https://images.unsplash.com/photo-1559847844-5315695dadae?w=600&h=600&fit=crop"
-            alt="Dish 7"
-          />
-        </div>
-        <div class="gallery-item">
-          <img
-            src="https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=600&h=600&fit=crop"
-            alt="Dish 8"
-          />
-        </div>
-      </div>
-    </section>
 
-    <!-- Reservation Section -->
-    <section class="reservation reveal" id="reservation">
-      <div class="reservation-container">
-        <h2>Stol Band Qilish</h2>
-        <div class="red-line"></div>
-        <p style="font-size: 1.2rem; color: #666; margin-bottom: 2rem">
-          Unutilmas kechani biz bilan o'tkazing
-        </p>
+        <div class="modal-body">
+          <div
+            style="font-size: 4em; text-align: center; margin-bottom: 20px"
+            id="modalGameEmoji"
+          >
+            🎮
+          </div>
 
-        <form class="reservation-form" onsubmit="handleReservation(event)">
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Ismingiz</label>
-              <input type="text" required placeholder="Ismingizni kiriting" />
+          <p id="modalGameDesc">Game description will appear here</p>
+
+          <h4
+            style="color: var(--primary); margin-top: 25px; margin-bottom: 15px"
+          >
+            📸 Screenshots
+          </h4>
+          <div class="modal-screenshots">
+            <div class="screenshot">
+              <img
+                src="./picture/kd-rush.jpg"
+                alt=""
+                width="230px"
+                height="150px"
+              />
             </div>
-            <div class="form-group">
-              <label>Telefon</label>
-              <input type="tel" required placeholder="+998 XX XXX XX XX" />
+            <div class="screenshot">
+              <img src="./picture/mk.jpg" alt="" width="230px" height="150px" />
             </div>
-            <div class="form-group">
-              <label>Sana</label>
-              <input type="date" required />
-            </div>
-            <div class="form-group">
-              <label>Vaqt</label>
-              <input type="time" required />
-            </div>
-            <div class="form-group">
-              <label>Odamlar soni</label>
-              <select required>
-                <option>1 kishi</option>
-                <option>2 kishi</option>
-                <option>3 kishi</option>
-                <option>4 kishi</option>
-                <option>5+ kishi</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Maxsus so'rov</label>
-              <select>
-                <option>Umumiy</option>
-                <option>Tug'ilgan kun</option>
-                <option>Yubiley</option>
-                <option>Romantik kechki ovqat</option>
-              </select>
-            </div>
-            <div class="form-group full-width">
-              <label>Qo'shimcha izoh</label>
-              <textarea
-                rows="4"
-                placeholder="Maxsus xohishlaringiz..."
-              ></textarea>
+            <div class="screenshot">
+              <img
+                src="./picture/cs2.png"
+                alt=""
+                width="230px"
+                height="150px"
+              />
             </div>
           </div>
-          <button type="submit" class="submit-btn">BAND QILISH</button>
-        </form>
-      </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="footer-container">
+          <h4
+            style="color: var(--primary); margin-top: 25px; margin-bottom: 15px"
+          >
+            ⚙️ Game Specs
+          </h4>
+          <div class="modal-specs">
+            <div class="spec-item">
+              <span class="spec-label">Genre:</span>
+              <span class="spec-value" id="modalGenre">Action</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Developer:</span>
+              <span class="spec-value" id="modalDeveloper">Studio Name</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Release Date:</span>
+              <span class="spec-value" id="modalRelease">2024</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Platform:</span>
+              <span class="spec-value" id="modalPlatform">PC, Console</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Rating:</span>
+              <span class="spec-value" id="modalRating">9.5/10</span>
+            </div>
+          </div>
+
+          <p style="margin-top: 20px; color: var(--text-secondary)">
+            🌟 Join millions of players worldwide and experience next-generation
+            gaming. Download now and get exclusive rewards!
+          </p>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn-large btn-play">▶ Play Now</button>
+          <button class="btn-large btn-wishlist">❤ Add to Wishlist</button>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-content">
         <div class="footer-section">
-          <h3>blya</h3>
-          <p>Premium italyan restorani</p>
-          <p style="margin-top: 2rem">Har kuni: 12:00 - 23:00</p>
+          <h4>About GameVerse</h4>
+          <p style="color: var(--text-secondary); margin-bottom: 15px">
+            The ultimate destination for gamers worldwide. Play thousands of
+            games and connect with the gaming community.
+          </p>
           <div class="social-links">
-            <a href="#" class="social-link">f</a>
-            <a href="#" class="social-link">S</a>
-            <a href="#" class="social-link">S</a>
+            <div class="social-icon">
+              <img
+                src="./picture/facebook.svg"
+                alt="facebook"
+                width="30px"
+                height="30px"
+              />
+            </div>
+            <div class="social-icon">
+              <img
+                src="./picture/twitter.svg"
+                alt="twitter"
+                width="30px"
+                height="30px"
+              />
+            </div>
+            <div class="social-icon">
+              <img src="./picture/tg1.svg" alt="" width="45px" height="45px" />
+            </div>
+            <div class="social-icon">
+              <img
+                src="./picture/gthub1.svg"
+                alt=""
+                width="49px"
+                height="49px"
+              />
+            </div>
           </div>
         </div>
+
         <div class="footer-section">
-          <h3>Aloqa</h3>
-          <a href="tel:+998712345678">+998 (71) 234-56-78</a>
-          <a href="mailto:info@blya.uz">info@blya.uz</a>
-          <p style="margin-top: 1rem">Toshkent sh., Amir Temur ko'chasi 1A</p>
+          <h4>Quick Links</h4>
+          <a href="#">Games Library</a>
+          <a href="#">Top Charts</a>
+          <a href="#">New Releases</a>
+          <a href="#">Community</a>
         </div>
+
         <div class="footer-section">
-          <h3>Ish vaqti</h3>
-          <p>Dushanba - Yakshanba</p>
-          <p>12:00 - 23:00</p>
-          <p style="margin-top: 1rem; color: var(--red)">Bayramda ham ochiq!</p>
+          <h4>Support</h4>
+          <a href="#">Help Center</a>
+          <a href="#">Contact Us</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+
+        <div class="footer-section">
+          <h4>Subscribe</h4>
+          <p style="color: var(--text-secondary); margin-bottom: 15px">
+            Get the latest gaming news and exclusive offers
+          </p>
+          <div style="display: flex; gap: 10px">
+            <input
+              type="email"
+              placeholder="Your email"
+              style="
+                flex: 1;
+                padding: 10px;
+                border-radius: 6px;
+                border: 2px solid var(--border);
+                background: var(--dark-bg);
+                color: var(--text-primary);
+              "
+            />
+            <button class="btn-primary" style="padding: 10px 20px">
+              Subscribe
+            </button>
+          </div>
         </div>
       </div>
+
       <div class="footer-bottom">
-        <p>© 2026. Barcha huquqlar himoyalangan.</p>
+        <p>&copy; 2026</p>
       </div>
     </footer>
+
     <script src="./app.js"></script>
   </body>
 </html>
