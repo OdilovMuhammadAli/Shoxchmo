@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>NEXUS | THE ULTIMATE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NEXUS | THE ULTIMATE DARK</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -28,6 +29,9 @@
         pointer-events: none;
         opacity: 0;
         transform-style: preserve-3d;
+        /* Изначально все размыто */
+        filter: blur(20px);
+        will-change: filter, transform, opacity;
       }
 
       .huge-text {
@@ -85,19 +89,26 @@
         overflow: hidden;
       }
 
+      /* Стиль для карточек галереи */
       .glass-card {
         background: rgba(255, 255, 255, 0.03);
         border: 1px solid rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(20px);
         border-radius: 30px;
         overflow: hidden;
+        will-change: transform, filter, opacity;
       }
-
       .glass-card img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         opacity: 0.8;
+      }
+
+      /* Черный футер */
+      .black-footer {
+        background: #000;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
       }
     </style>
   </head>
@@ -159,7 +170,7 @@
           M4 MAX
         </div>
         <div class="chip-box" id="chip-model">
-          <span class="text-6xl font-black text-amber-500">M4</span>
+          <span class="text-6xl font-black text-amber-500 shadow-lg">M4</span>
         </div>
       </div>
 
@@ -183,7 +194,9 @@
           <div
             class="glass-card h-96 mt-[-40px] flex items-center justify-center bg-blue-600"
           >
-            <h3 class="text-4xl font-black tracking-tighter uppercase italic">
+            <h3
+              class="text-4xl font-black tracking-tighter uppercase italic text-center"
+            >
               Stay Next.
             </h3>
           </div>
@@ -227,11 +240,11 @@
     </div>
 
     <footer
-      class="relative z-[1000] bg-black pt-40 pb-10 px-10 border-t border-white/5"
+      class="relative z-[1000] black-footer pt-40 pb-20 px-10 rounded-t-[5vw]"
     >
       <div class="max-w-7xl mx-auto flex flex-col items-center text-center">
         <h2
-          class="text-[12vw] font-black italic tracking-tighter leading-none mb-12"
+          class="text-[12vw] font-black italic tracking-tighter leading-none mb-12 text-blue-600"
         >
           NEXUS.
         </h2>
@@ -264,43 +277,64 @@
         },
       });
 
-      tl.to("#s-intro", { opacity: 1, duration: 1 }).to("#s-intro h1", {
-        scale: 15,
-        opacity: 0,
-        duration: 3,
-        ease: "power2.in",
-      });
+      // 1. INTRO
+      tl.to("#s-intro", { opacity: 1, filter: "blur(0px)", duration: 1 }).to(
+        "#s-intro h1",
+        { scale: 15, opacity: 0, duration: 3, ease: "power2.in" }
+      );
 
-      tl.to("#s-explode", { opacity: 1, duration: 1.5 })
-        .from("#lay-1", { z: -1500, opacity: 0, duration: 3 })
-        .from("#lay-2", { z: -800, opacity: 0, duration: 3 }, "-=2.5")
-        .from("#lay-3", { z: 800, opacity: 0, duration: 3 }, "-=2.5")
+      // 2. EXPLODE iPAD (Вход: из блюра в четкость -> Анимация -> Выход: в блюр)
+      tl.to("#s-explode", { opacity: 1, filter: "blur(0px)", duration: 1.5 })
+        .from("#lay-1", { z: -1500, duration: 3 }, "-=1")
+        .from("#lay-2", { z: -800, duration: 3 }, "-=2.5")
+        .from("#lay-3", { z: 800, duration: 3 }, "-=2.5")
         .to("#lay-1", { x: -200, rotateY: -20, duration: 3 }, "+=0.5")
         .to("#lay-3", { x: 200, rotateY: 20, duration: 3 }, "-=3")
         .to("#s-explode", {
           scale: 0.5,
           opacity: 0,
+          filter: "blur(30px)",
+          duration: 2.5,
+        });
+
+      // 3. CHIP MACRO
+      tl.to("#s-chip", { opacity: 1, filter: "blur(0px)", duration: 1 })
+        .from("#chip-model", { scale: 0.2, rotateY: 180, duration: 2 })
+        .to("#chip-bg-text", { scale: 3, opacity: 0.1, duration: 2 }, "-=1")
+        .to("#s-chip", {
+          scale: 10,
+          opacity: 0,
           filter: "blur(20px)",
           duration: 2.5,
         });
 
-      tl.to("#s-chip", { opacity: 1, duration: 1 })
-        .from("#chip-model", { scale: 0.2, rotateY: 180, duration: 2 })
-        .to("#s-chip", { scale: 10, opacity: 0, duration: 2.5 });
-
-      tl.to("#s-gallery", { opacity: 1, duration: 1 })
+      // 4. GALLERY EXPLOSION (Анимация для карточек)
+      tl.to("#s-gallery", { opacity: 1, filter: "blur(0px)", duration: 1.5 }) // Вход в фокус
         .from("#gallery-grid div", {
           z: -5000,
-          opacity: 0,
           stagger: 0.1,
-          duration: 3,
-        })
-        .to("#gallery-grid", { scale: 4, opacity: 0, duration: 3 });
+          duration: 4,
+          ease: "back.out(1)",
+        }) // Разлет ("взрыв")
+        .to("#gallery-grid", {
+          scale: 4,
+          opacity: 0,
+          filter: "blur(40px)",
+          duration: 3.5,
+        }); // Выход в сильный блюр
 
-      tl.to("#s-mac", { opacity: 1, duration: 1 })
-        .to("#mac-lid", { rotateX: 0, duration: 2.5 })
-        .to("#s-mac", { scale: 0.8, opacity: 0, duration: 2, delay: 0.5 });
+      // 5. MACBOOK
+      tl.to("#s-mac", { opacity: 1, filter: "blur(0px)", duration: 1.5 })
+        .to("#mac-lid", { rotateX: 0, duration: 3 })
+        .to("#s-mac", {
+          scale: 0.8,
+          opacity: 0,
+          filter: "blur(20px)",
+          duration: 2,
+          delay: 0.5,
+        });
 
+      // Mouse Parallax
       window.addEventListener("mousemove", (e) => {
         const x = (e.clientX / window.innerWidth - 0.5) * 20;
         const y = (e.clientY / window.innerHeight - 0.5) * 20;
