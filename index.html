@@ -25,8 +25,8 @@
         overflow-x: hidden;
       }
 
-      /* Фиксированные контейнеры для первой части */
-      .section-container {
+      /* Фиксированный фон для анимации первого экрана */
+      .hero-fixed {
         position: fixed;
         top: 0;
         left: 0;
@@ -35,27 +35,26 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        z-index: 50;
         pointer-events: none;
-        opacity: 0;
-        filter: blur(20px);
       }
 
       .hero-title {
-        font-size: clamp(3rem, 8vw, 7rem);
+        font-size: clamp(2.5rem, 10vw, 7rem);
         font-weight: 800;
         line-height: 0.9;
         letter-spacing: -0.05em;
         text-align: center;
       }
 
-      /* Эффект свечения и сетки */
+      /* Элементы декора */
       .cursor-glow {
         position: fixed;
-        width: 600px;
-        height: 600px;
+        width: 400px;
+        height: 400px;
         background: radial-gradient(
           circle,
-          rgba(59, 130, 246, 0.07) 0%,
+          rgba(59, 130, 246, 0.1) 0%,
           transparent 70%
         );
         border-radius: 50%;
@@ -68,57 +67,69 @@
         inset: 0;
         background-image: linear-gradient(var(--border) 1px, transparent 1px),
           linear-gradient(90deg, var(--border) 1px, transparent 1px);
-        background-size: 60px 60px;
+        background-size: 40px 40px;
         mask-image: radial-gradient(circle at center, black, transparent 80%);
         z-index: -1;
-        opacity: 0.5;
+        opacity: 0.4;
       }
 
-      /* Стили для Bento и Форм */
+      /* Адаптивная Bento-сетка */
+      .bento-grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 16px;
+      }
+      @media (min-width: 768px) {
+        .bento-grid {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 24px;
+        }
+        .col-span-2 {
+          grid-column: span 2 / span 2;
+        }
+      }
+
       .bento-item {
         background: var(--glass);
         border: 1px solid var(--border);
-        border-radius: 32px;
-        padding: 40px;
+        border-radius: 24px;
+        padding: 32px;
         position: relative;
         overflow: hidden;
+        transition: transform 0.3s ease;
       }
+      .bento-item:hover {
+        border-color: var(--accent);
+      }
+
       .step-number {
-        font-size: 120px;
+        font-size: 80px;
         font-weight: 800;
         position: absolute;
-        right: -20px;
-        bottom: -40px;
-        opacity: 0.03;
+        right: -10px;
+        bottom: -20px;
+        opacity: 0.05;
       }
+
+      /* Поля ввода */
       .input-field {
-        background: rgba(255, 255, 255, 0.02);
+        background: rgba(255, 255, 255, 0.03);
         border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 20px;
+        border-radius: 12px;
+        padding: 16px;
         width: 100%;
         outline: none;
         color: white;
+        transition: 0.3s;
+      }
+      .input-field:focus {
+        border-color: var(--accent);
+        background: rgba(59, 130, 246, 0.05);
       }
 
-      /* Стили MacBook */
-      .laptop {
-        transform-style: preserve-3d;
-        width: 500px;
-        height: 320px;
-        position: relative;
-      }
-      .lid {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 100%;
-        background: #0a0a0a;
-        border: 1px solid #333;
-        border-radius: 12px;
-        transform-origin: bottom;
-        transform: rotateX(-90deg);
-        overflow: hidden;
+      /* Навигация */
+      nav {
+        mix-blend-difference: exclusion;
       }
     </style>
   </head>
@@ -127,128 +138,115 @@
     <div class="grid-canvas"></div>
 
     <nav
-      class="fixed top-0 w-full z-[1000] p-8 flex justify-between items-center backdrop-blur-md mix-blend-difference"
+      class="fixed top-0 w-full z-[1000] p-6 md:p-10 flex justify-between items-center backdrop-blur-sm"
     >
       <div class="text-xl font-bold tracking-tighter">
         FOUNDER<span class="text-blue-500">OS</span>
       </div>
       <div
-        class="flex gap-8 text-xs font-semibold uppercase tracking-widest opacity-50"
+        class="flex gap-4 md:gap-8 text-[10px] font-semibold uppercase tracking-widest opacity-60"
       >
-        <a href="#modules">Модули</a><a href="#contact">Контакт</a>
+        <a href="#modules" class="hover:text-blue-500">Модули</a>
+        <a href="#contact" class="hover:text-blue-500">Контакт</a>
       </div>
     </nav>
 
-    <div id="main-scroller" style="height: 1200vh">
-      <div
-        class="section-container z-[50]"
-        id="s-hero"
-        style="opacity: 1; filter: blur(0px)"
-      >
-        <div class="text-center max-w-5xl">
-          <span
-            class="inline-block px-4 py-1 border border-blue-500/30 rounded-full text-[10px] font-bold tracking-[0.3em] text-blue-400 mb-8 uppercase"
-            >Build. Scale. Repeat.</span
-          >
-          <h1 class="hero-title mb-8">
-            ОПЕРАЦИОННАЯ <br />
-            СИСТЕМА ДЛЯ <span class="text-blue-500">РОСТА.</span>
-          </h1>
-          <p class="text-zinc-400 text-lg max-w-2xl mx-auto mb-12 font-light">
-            Founder OS — это архитектура процессов, которая превращает хаос
-            стартапа в предсказуемую машину для масштабирования.
-          </p>
-          <button
-            onclick="lenis.scrollTo('#contact')"
-            class="pointer-events-auto bg-white text-black px-10 py-5 rounded-full font-bold text-sm hover:bg-blue-500 hover:text-white transition-all"
-          >
-            Записаться на созвон
-          </button>
-        </div>
-      </div>
+    <div id="hero-trigger" style="height: 200vh"></div>
 
-      <div class="section-container" id="s-mac">
-        <div class="flex flex-col items-center">
-          <div class="laptop">
-            <div class="lid" id="mac-lid">
-              <video
-                autoplay
-                muted
-                loop
-                playsinline
-                class="w-full h-full object-cover"
-              >
-                <source
-                  src="https://www.apple.com/105/media/us/macbook-pro/2024/0297072a-92f7-4340-9b0d-7106368d9f10/anim/hero/large_2x.mp4"
-                  type="video/mp4"
-                />
-              </video>
-            </div>
-            <div
-              class="h-3 bg-zinc-800 w-full absolute bottom-[-13px] rounded-b-xl border-t border-white/5"
-            ></div>
-          </div>
-        </div>
+    <div class="hero-fixed" id="hero-section">
+      <div class="text-center px-6 max-w-5xl">
+        <span
+          class="inline-block px-4 py-1 border border-blue-500/30 rounded-full text-[9px] font-bold tracking-[0.3em] text-blue-400 mb-6 uppercase"
+          >Build. Scale. Repeat.</span
+        >
+        <h1 class="hero-title mb-6">
+          ОПЕРАЦИОННАЯ <br />
+          СИСТЕМА ДЛЯ <span class="text-blue-500 italic">РОСТА.</span>
+        </h1>
+        <p
+          class="text-zinc-400 text-sm md:text-lg max-w-2xl mx-auto mb-10 font-light opacity-80"
+        >
+          Founder OS — это архитектура процессов, которая превращает хаос
+          стартапа в предсказуемую машину для масштабирования.
+        </p>
+        <button
+          onclick="lenis.scrollTo('#contact')"
+          class="pointer-events-auto bg-white text-black px-8 py-4 md:px-10 md:py-5 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all"
+        >
+          Записаться на созвон
+        </button>
       </div>
     </div>
 
     <main class="relative z-[100] bg-black">
-      <section id="modules" class="py-32 px-6 max-w-7xl mx-auto">
+      <section id="modules" class="py-24 px-6 max-w-7xl mx-auto">
         <h2
-          class="text-4xl font-bold mb-20 tracking-tighter text-center md:text-left"
+          class="text-3xl md:text-5xl font-bold mb-16 tracking-tighter text-center md:text-left uppercase italic"
         >
-          АРХИТЕКТУРА СИСТЕМЫ
+          Архитектура системы
         </h2>
-        <div class="flex flex-col md:grid md:grid-cols-3 gap-6">
-          <div class="bento-item col-span-2 group">
-            <h3 class="text-2xl font-bold mb-4">Strategy & Vision</h3>
-            <p class="text-zinc-400 max-w-sm">
+
+        <div class="bento-grid">
+          <div class="bento-item col-span-2">
+            <h3 class="text-xl md:text-2xl font-bold mb-4">
+              Strategy & Vision
+            </h3>
+            <p class="text-zinc-400 text-sm md:text-base max-w-sm">
               Формируем ДНК продукта и дорожную карту на 24 месяца вперед.
             </p>
             <div class="step-number">01</div>
           </div>
-          <div class="bento-item group">
-            <h3 class="text-2xl font-bold mb-4">Growth</h3>
-            <p class="text-zinc-400">
+          <div class="bento-item">
+            <h3 class="text-xl md:text-2xl font-bold mb-4">Growth</h3>
+            <p class="text-zinc-400 text-sm">
               Механики виральности и каналы захвата рынка.
             </p>
             <div class="step-number">02</div>
           </div>
-          <div class="bento-item group">
-            <h3 class="text-2xl font-bold mb-4">Operations</h3>
-            <p class="text-zinc-400">
+          <div class="bento-item">
+            <h3 class="text-xl md:text-2xl font-bold mb-4">Operations</h3>
+            <p class="text-zinc-400 text-sm">
               Автоматизация рутины и найм топ-талантов.
             </p>
             <div class="step-number">03</div>
           </div>
-          <div
-            class="bento-item col-span-2 group bg-blue-600/5 border-blue-500/20"
-          >
-            <h3 class="text-2xl font-bold mb-4">Product Ecosystem</h3>
-            <p class="text-zinc-400 max-w-md">
-              Создаем продукт, который пользователи рекомендуют сами.
+          <div class="bento-item col-span-2 bg-blue-600/5 border-blue-500/20">
+            <h3 class="text-xl md:text-2xl font-bold mb-4 text-blue-400">
+              Product Ecosystem
+            </h3>
+            <p class="text-zinc-400 text-sm md:text-base max-w-md">
+              Создаем продукт, который пользователи рекомендуют сами, снижая
+              стоимость привлечения.
             </p>
             <div class="step-number">04</div>
           </div>
         </div>
       </section>
 
-      <section id="contact" class="py-32 px-6">
+      <section id="contact" class="py-24 px-6">
         <div
-          class="max-w-xl mx-auto bg-zinc-900/40 p-12 rounded-[40px] border border-white/5 backdrop-blur-3xl"
+          class="max-w-xl mx-auto bg-zinc-950 p-8 md:p-12 rounded-[32px] md:rounded-[40px] border border-white/5 shadow-2xl"
         >
-          <h2 class="text-3xl font-bold mb-2 tracking-tighter uppercase italic">
+          <h2
+            class="text-3xl md:text-4xl font-black mb-4 tracking-tighter uppercase italic text-center md:text-left"
+          >
             Масштабируемся?
           </h2>
-          <p class="text-zinc-500 mb-10 text-sm">
-            Оставьте заявку для аудита вашей системы.
+          <p
+            class="text-zinc-500 mb-8 text-xs md:text-sm text-center md:text-left"
+          >
+            Оставьте заявку, и мы проведем аудит вашей текущей системы роста.
           </p>
           <form class="space-y-4">
             <input type="text" placeholder="Имя" class="input-field" />
             <input type="text" placeholder="Компания" class="input-field" />
-            <input type="text" placeholder="Telegram" class="input-field" />
+            <input
+              type="text"
+              placeholder="Telegram / Email"
+              class="input-field"
+            />
             <button
-              class="w-full bg-white text-black py-5 rounded-2xl font-black text-sm tracking-widest uppercase hover:bg-blue-600 hover:text-white transition-all"
+              class="w-full bg-white text-black py-4 md:py-5 rounded-2xl font-black text-xs md:text-sm tracking-widest uppercase hover:bg-blue-600 hover:text-white transition-all"
             >
               ОТПРАВИТЬ
             </button>
@@ -258,70 +256,63 @@
     </main>
 
     <footer
-      class="p-20 text-center border-t border-white/5 bg-black relative z-[100]"
+      class="py-20 px-10 text-center bg-black relative z-[100] border-t border-white/5"
     >
       <h2
-        class="text-[10vw] font-black italic tracking-tighter leading-none mb-10 text-blue-600 uppercase opacity-20"
+        class="text-[12vw] font-black italic tracking-tighter leading-none mb-8 text-blue-600 uppercase opacity-10"
       >
         Founder OS.
       </h2>
-      <p class="text-[10px] uppercase tracking-[0.5em] opacity-40">
-        © 2026 BEYOND THE LIMITS
+      <p class="text-[9px] uppercase tracking-[1em] opacity-30">
+        © 2026 Beyond the Future
       </p>
     </footer>
 
     <script>
-      const lenis = new Lenis({ duration: 1.5 });
+      // Плавный скролл
+      const lenis = new Lenis({ duration: 1.2 });
       function raf(time) {
         lenis.raf(time);
         requestAnimationFrame(raf);
       }
       requestAnimationFrame(raf);
 
-      // Свечение за курсором
+      // Свечение за курсором (только для десктопа)
       const glow = document.getElementById("glow");
-      window.addEventListener("mousemove", (e) => {
-        gsap.to(glow, { x: e.clientX, y: e.clientY, duration: 1 });
-      });
+      if (window.innerWidth > 768) {
+        window.addEventListener("mousemove", (e) => {
+          gsap.to(glow, { x: e.clientX, y: e.clientY, duration: 0.8 });
+        });
+      }
 
       gsap.registerPlugin(ScrollTrigger);
-      const tl = gsap.timeline({
+
+      // Анимация Hero-секции при скролле
+      gsap.to("#hero-section", {
         scrollTrigger: {
-          trigger: "#main-scroller",
+          trigger: "#hero-trigger",
           start: "top top",
-          end: "bottom bottom",
-          scrub: 1,
+          end: "bottom top",
+          scrub: true,
         },
-      });
-
-      // 1. Уход Hero
-      tl.to("#s-hero", {
-        y: -100,
         opacity: 0,
-        filter: "blur(40px)",
-        pointerEvents: "none",
-        duration: 2,
+        scale: 0.9,
+        filter: "blur(20px)",
+        y: -50,
       });
 
-      // 2. Появление и открытие MacBook
-      tl.to("#s-mac", { opacity: 1, filter: "blur(0px)", duration: 2 })
-        .to("#mac-lid", { rotateX: 0, duration: 4 })
-        .to("#s-mac", {
-          scale: 0.5,
-          y: -200,
-          opacity: 0,
-          filter: "blur(40px)",
-          duration: 3,
-        });
-
-      // Анимация Bento блоков
+      // Появление элементов Bento
       gsap.utils.toArray(".bento-item").forEach((item) => {
         gsap.from(item, {
-          scrollTrigger: { trigger: item, start: "top 90%" },
-          y: 50,
+          scrollTrigger: {
+            trigger: item,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          },
+          y: 30,
           opacity: 0,
-          duration: 1,
-          ease: "power4.out",
+          duration: 0.8,
+          ease: "power2.out",
         });
       });
     </script>
