@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>NEXUS | THE INFINITE</title>
+    <title>NEXUS | THE ULTIMATE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -45,19 +45,26 @@
         position: relative;
         overflow: hidden;
         border-radius: 30px;
-        box-shadow: 0 50px 100px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 50px 100px rgba(0, 0, 0, 0.8);
+      }
+
+      .exploded-layer {
+        position: absolute;
+        width: 450px;
+        height: 600px;
+        border-radius: 24px;
+        pointer-events: none;
       }
 
       .chip-box {
         width: 300px;
         height: 300px;
-        background: linear-gradient(135deg, #333, #000);
-        border: 2px solid #555;
+        background: linear-gradient(135deg, #111, #000);
+        border: 2px solid #333;
         border-radius: 40px;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 0 80px rgba(255, 170, 0, 0.2);
       }
 
       .laptop {
@@ -83,7 +90,14 @@
         border: 1px solid rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(20px);
         border-radius: 30px;
-        padding: 30px;
+        overflow: hidden;
+      }
+
+      .glass-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.8;
       }
     </style>
   </head>
@@ -99,9 +113,45 @@
       </div>
     </nav>
 
-    <div id="main-scroller" style="height: 1800vh">
+    <div id="main-scroller" style="height: 2000vh">
       <div class="section-container" id="s-intro">
         <h1 class="huge-text italic">PURE<br />FORCE</h1>
+      </div>
+
+      <div class="section-container" id="s-explode">
+        <div class="relative w-[450px] h-[600px]" id="explode-group">
+          <div
+            class="exploded-layer bg-zinc-800 border border-white/10"
+            id="lay-1"
+          ></div>
+          <div
+            class="exploded-layer flex items-center justify-center bg-blue-600/5 border border-blue-500/20 backdrop-blur-md"
+            id="lay-2"
+          >
+            <div
+              class="w-20 h-20 bg-blue-600 rounded-3xl flex items-center justify-center font-black"
+            >
+              M4
+            </div>
+          </div>
+          <div
+            class="exploded-layer overflow-hidden border border-white/20"
+            id="lay-3"
+          >
+            <video
+              autoplay
+              muted
+              loop
+              playsinline
+              class="w-full h-full object-cover"
+            >
+              <source
+                src="https://www.apple.com/105/media/us/ipad-pro/2024/4dcca390-0fca-4933-b1bc-1d13f9694b8e/anim/hero/large_2x.mp4"
+                type="video/mp4"
+              />
+            </video>
+          </div>
+        </div>
       </div>
 
       <div class="section-container" id="s-chip">
@@ -109,51 +159,43 @@
           M4 MAX
         </div>
         <div class="chip-box" id="chip-model">
-          <span class="text-6xl font-black text-amber-500 shadow-lg">M4</span>
-        </div>
-      </div>
-
-      <div class="section-container" id="s-ipad">
-        <div class="flex flex-col items-center">
-          <div class="media-box" id="ipad-vid">
-            <iframe
-              width="100%"
-              height="100%"
-              src="https://www.youtube.com/embed/S2p8E4atWyk?autoplay=1&mute=1&loop=1&playlist=S2p8E4atWyk&controls=0"
-              frameborder="0"
-              class="scale-110"
-            ></iframe>
-          </div>
-          <h2 class="text-8xl font-black mt-10 italic">iPAD PRO.</h2>
+          <span class="text-6xl font-black text-amber-500">M4</span>
         </div>
       </div>
 
       <div class="section-container" id="s-gallery">
         <div class="grid grid-cols-3 gap-8 w-[120vw]" id="gallery-grid">
-          <div class="glass-card h-64 flex items-center justify-center">
-            <img src="./picture/iphonee.jpg" class="h-full object-contain" />
-          </div>
-          <div class="glass-card h-80 flex items-center justify-center">
-            <img src="./picture/ipad.jpg" class="h-full object-contain" />
-          </div>
-          <div class="glass-card h-64 flex items-center justify-center">
-            <img src="./picture/iphonee.jpg" class="h-full object-contain" />
-          </div>
-          <div
-            class="glass-card h-96 mt-[-40px] flex items-center justify-center"
-          >
-            <h3 class="text-4xl font-black">STAY NEXT.</h3>
-          </div>
-          <div class="glass-card h-64 flex items-center justify-center">
+          <div class="glass-card h-64">
             <img
-              src="./picture/Fluid-Lines.webp"
-              class="h-full object-contain"
+              src="https://images.unsplash.com/photo-1510557880182-3d4d3cba3f21?q=80&w=2070&auto=format&fit=crop"
+            />
+          </div>
+          <div class="glass-card h-80">
+            <img
+              src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?q=80&w=2030&auto=format&fit=crop"
+            />
+          </div>
+          <div class="glass-card h-64">
+            <img
+              src="https://images.unsplash.com/photo-1556656793-062ff9878273?q=80&w=2070&auto=format&fit=crop"
             />
           </div>
           <div
-            class="glass-card h-80 mt-[-20px] flex items-center justify-center"
+            class="glass-card h-96 mt-[-40px] flex items-center justify-center bg-blue-600"
           >
-            <img src="./picture/iphonee.jpg" class="h-full object-contain" />
+            <h3 class="text-4xl font-black tracking-tighter uppercase italic">
+              Stay Next.
+            </h3>
+          </div>
+          <div class="glass-card h-64">
+            <img
+              src="https://images.unsplash.com/photo-1591337676887-a217a6970c8a?q=80&w=1780&auto=format&fit=crop"
+            />
+          </div>
+          <div class="glass-card h-80 mt-[-20px]">
+            <img
+              src="https://images.unsplash.com/photo-1616348436168-de43ad0db179?q=80&w=1981&auto=format&fit=crop"
+            />
           </div>
         </div>
       </div>
@@ -162,12 +204,18 @@
         <div class="flex flex-col items-center">
           <div class="laptop">
             <div class="lid" id="mac-lid">
-              <iframe
-                width="100%"
-                height="100%"
-                src="https://www.youtube.com/embed/S2p8E4atWyk?autoplay=1&mute=1&loop=1&playlist=S2p8E4atWyk&controls=0"
-                frameborder="0"
-              ></iframe>
+              <video
+                autoplay
+                muted
+                loop
+                playsinline
+                class="w-full h-full object-cover"
+              >
+                <source
+                  src="https://www.apple.com/105/media/us/macbook-pro/2024/0297072a-92f7-4340-9b0d-7106368d9f10/anim/hero/large_2x.mp4"
+                  type="video/mp4"
+                />
+              </video>
             </div>
             <div
               class="h-3 bg-zinc-800 w-full absolute bottom-[-13px] rounded-b-xl border-t border-white/5"
@@ -179,67 +227,21 @@
     </div>
 
     <footer
-      class="relative z-[1000] bg-white text-black pt-32 pb-10 px-10 rounded-t-[5vw]"
+      class="relative z-[1000] bg-black pt-40 pb-10 px-10 border-t border-white/5"
     >
-      <div class="max-w-7xl mx-auto">
-        <div
-          class="flex flex-col md:flex-row justify-between items-start mb-20"
+      <div class="max-w-7xl mx-auto flex flex-col items-center text-center">
+        <h2
+          class="text-[12vw] font-black italic tracking-tighter leading-none mb-12"
         >
-          <h2
-            class="text-[10vw] font-black leading-none tracking-tighter uppercase italic"
-          >
-            NEXUS.
-          </h2>
-          <div class="mt-10 md:mt-0">
-            <p class="text-2xl font-bold max-w-sm mb-8">
-              Engineering for those who define the future.
-            </p>
-            <button
-              class="bg-black text-white px-12 py-6 rounded-full font-black uppercase text-xs tracking-[0.3em]"
-            >
-              Order Now
-            </button>
-          </div>
-        </div>
-
-        <div
-          class="grid grid-cols-2 md:grid-cols-4 gap-10 border-t border-zinc-200 pt-20"
+          NEXUS.
+        </h2>
+        <button
+          class="bg-white text-black px-16 py-6 rounded-full font-black uppercase text-xs tracking-[0.3em] hover:bg-blue-600 hover:text-white transition-all duration-500"
         >
-          <div class="space-y-4">
-            <p class="font-black uppercase text-[10px] text-zinc-400">
-              Products
-            </p>
-            <p>iPhone</p>
-            <p>Mac</p>
-            <p>Watch</p>
-          </div>
-          <div class="space-y-4">
-            <p class="font-black uppercase text-[10px] text-zinc-400">
-              Company
-            </p>
-            <p>About</p>
-            <p>Careers</p>
-            <p>Ethics</p>
-          </div>
-          <div class="space-y-4">
-            <p class="font-black uppercase text-[10px] text-zinc-400">
-              Support
-            </p>
-            <p>Community</p>
-            <p>Warranty</p>
-            <p>Help</p>
-          </div>
-          <div class="space-y-4 text-right">
-            <p class="font-black uppercase text-[10px] text-zinc-400">Social</p>
-            <p>Instagram</p>
-            <p>X / Twitter</p>
-            <p>LinkedIn</p>
-          </div>
-        </div>
-        <p
-          class="mt-20 text-center text-[10px] font-bold opacity-20 tracking-[2em]"
-        >
-          NEXUS SYSTEMS 2026
+          Order Now
+        </button>
+        <p class="mt-20 opacity-20 text-[10px] font-bold tracking-[2em]">
+          BEYOND THE FUTURE 2026
         </p>
       </div>
     </footer>
@@ -253,7 +255,6 @@
       requestAnimationFrame(raf);
 
       gsap.registerPlugin(ScrollTrigger);
-
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: "#main-scroller",
@@ -263,7 +264,6 @@
         },
       });
 
-      // 1. INTRO
       tl.to("#s-intro", { opacity: 1, duration: 1 }).to("#s-intro h1", {
         scale: 15,
         opacity: 0,
@@ -271,18 +271,23 @@
         ease: "power2.in",
       });
 
-      // 2. CHIP MACRO
-      tl.to("#s-chip", { opacity: 1, duration: 1 }, "-=1")
+      tl.to("#s-explode", { opacity: 1, duration: 1.5 })
+        .from("#lay-1", { z: -1500, opacity: 0, duration: 3 })
+        .from("#lay-2", { z: -800, opacity: 0, duration: 3 }, "-=2.5")
+        .from("#lay-3", { z: 800, opacity: 0, duration: 3 }, "-=2.5")
+        .to("#lay-1", { x: -200, rotateY: -20, duration: 3 }, "+=0.5")
+        .to("#lay-3", { x: 200, rotateY: 20, duration: 3 }, "-=3")
+        .to("#s-explode", {
+          scale: 0.5,
+          opacity: 0,
+          filter: "blur(20px)",
+          duration: 2.5,
+        });
+
+      tl.to("#s-chip", { opacity: 1, duration: 1 })
         .from("#chip-model", { scale: 0.2, rotateY: 180, duration: 2 })
-        .to("#chip-bg-text", { scale: 3, opacity: 0.1, duration: 2 }, "-=1")
         .to("#s-chip", { scale: 10, opacity: 0, duration: 2.5 });
 
-      // 3. iPAD
-      tl.to("#s-ipad", { opacity: 1, duration: 1 })
-        .from("#ipad-vid", { y: 800, rotateX: -45, duration: 2 })
-        .to("#s-ipad", { x: -2000, opacity: 0, duration: 2, delay: 0.5 });
-
-      // 4. GALLERY EXPLOSION
       tl.to("#s-gallery", { opacity: 1, duration: 1 })
         .from("#gallery-grid div", {
           z: -5000,
@@ -292,12 +297,10 @@
         })
         .to("#gallery-grid", { scale: 4, opacity: 0, duration: 3 });
 
-      // 5. MACBOOK
       tl.to("#s-mac", { opacity: 1, duration: 1 })
         .to("#mac-lid", { rotateX: 0, duration: 2.5 })
         .to("#s-mac", { scale: 0.8, opacity: 0, duration: 2, delay: 0.5 });
 
-      // Mouse Parallax
       window.addEventListener("mousemove", (e) => {
         const x = (e.clientX / window.innerWidth - 0.5) * 20;
         const y = (e.clientY / window.innerHeight - 0.5) * 20;
