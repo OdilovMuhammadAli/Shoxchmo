@@ -2,8 +2,11 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Founder OS | The System</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>FOUNDER OS | THE SYSTEM</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -11,22 +14,15 @@
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap");
 
-      :root {
-        --bg: #000000;
-        --accent: #3b82f6;
-        --glass: rgba(255, 255, 255, 0.03);
-        --border: rgba(255, 255, 255, 0.08);
-      }
-
       body {
-        background-color: var(--bg);
+        background: #000;
         color: #fff;
         font-family: "Plus Jakarta Sans", sans-serif;
         overflow-x: hidden;
       }
 
-      /* Фиксированный фон для анимации первого экрана */
-      .hero-fixed {
+      /* Фиксированные секции как в Nexus */
+      .section-container {
         position: fixed;
         top: 0;
         left: 0;
@@ -35,241 +31,182 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        z-index: 50;
         pointer-events: none;
+        opacity: 0;
+        filter: blur(20px);
       }
 
+      /* Адаптивный Hero заголовок */
       .hero-title {
-        font-size: clamp(2.5rem, 10vw, 7rem);
+        font-size: clamp(2.3rem, 12vw, 7.5rem);
         font-weight: 800;
         line-height: 0.9;
         letter-spacing: -0.05em;
-        text-align: center;
+        text-transform: uppercase;
       }
 
-      /* Элементы декора */
-      .cursor-glow {
-        position: fixed;
-        width: 400px;
-        height: 400px;
-        background: radial-gradient(
-          circle,
-          rgba(59, 130, 246, 0.1) 0%,
-          transparent 70%
-        );
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 0;
-        transform: translate(-50%, -50%);
-      }
       .grid-canvas {
         position: fixed;
         inset: 0;
-        background-image: linear-gradient(var(--border) 1px, transparent 1px),
-          linear-gradient(90deg, var(--border) 1px, transparent 1px);
+        background-image: linear-gradient(
+            rgba(255, 255, 255, 0.05) 1px,
+            transparent 1px
+          ),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
         background-size: 40px 40px;
         mask-image: radial-gradient(circle at center, black, transparent 80%);
         z-index: -1;
-        opacity: 0.4;
-      }
-
-      /* Адаптивная Bento-сетка */
-      .bento-grid {
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-        gap: 16px;
-      }
-      @media (min-width: 768px) {
-        .bento-grid {
-          grid-template-columns: repeat(3, 1fr);
-          gap: 24px;
-        }
-        .col-span-2 {
-          grid-column: span 2 / span 2;
-        }
       }
 
       .bento-item {
-        background: var(--glass);
-        border: 1px solid var(--border);
-        border-radius: 24px;
-        padding: 32px;
-        position: relative;
-        overflow: hidden;
-        transition: transform 0.3s ease;
-      }
-      .bento-item:hover {
-        border-color: var(--accent);
-      }
-
-      .step-number {
-        font-size: 80px;
-        font-weight: 800;
-        position: absolute;
-        right: -10px;
-        bottom: -20px;
-        opacity: 0.05;
-      }
-
-      /* Поля ввода */
-      .input-field {
         background: rgba(255, 255, 255, 0.03);
-        border: 1px solid var(--border);
-        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px;
+        padding: 24px;
+        position: relative;
+      }
+
+      /* ФУТЕР - ИСПРАВЛЕНИЕ */
+      .footer-bg-text {
+        font-size: 18vw;
+        font-weight: 900;
+        font-style: italic;
+        color: #2563eb;
+        opacity: 0.2;
+        line-height: 0.8;
+        pointer-events: none;
+        text-transform: uppercase;
+      }
+
+      .input-field {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
         padding: 16px;
+        border-radius: 12px;
         width: 100%;
         outline: none;
-        color: white;
-        transition: 0.3s;
-      }
-      .input-field:focus {
-        border-color: var(--accent);
-        background: rgba(59, 130, 246, 0.05);
-      }
-
-      /* Навигация */
-      nav {
-        mix-blend-difference: exclusion;
+        color: #fff;
       }
     </style>
   </head>
   <body>
-    <div class="cursor-glow" id="glow"></div>
     <div class="grid-canvas"></div>
 
     <nav
-      class="fixed top-0 w-full z-[1000] p-6 md:p-10 flex justify-between items-center backdrop-blur-sm"
+      class="fixed top-0 w-full z-[1000] p-6 flex justify-between items-center mix-blend-difference"
     >
-      <div class="text-xl font-bold tracking-tighter">
-        FOUNDER<span class="text-blue-500">OS</span>
+      <div class="font-bold text-lg tracking-tighter">
+        FOUNDER<span class="text-blue-600">OS</span>
       </div>
-      <div
-        class="flex gap-4 md:gap-8 text-[10px] font-semibold uppercase tracking-widest opacity-60"
-      >
-        <a href="#modules" class="hover:text-blue-500">Модули</a>
-        <a href="#contact" class="hover:text-blue-500">Контакт</a>
+      <div class="opacity-40 text-[8px] font-bold tracking-[0.3em] uppercase">
+        System v2.0
       </div>
     </nav>
 
-    <div id="hero-trigger" style="height: 200vh"></div>
-
-    <div class="hero-fixed" id="hero-section">
-      <div class="text-center px-6 max-w-5xl">
-        <span
-          class="inline-block px-4 py-1 border border-blue-500/30 rounded-full text-[9px] font-bold tracking-[0.3em] text-blue-400 mb-6 uppercase"
-          >Build. Scale. Repeat.</span
-        >
-        <h1 class="hero-title mb-6">
-          ОПЕРАЦИОННАЯ <br />
-          СИСТЕМА ДЛЯ <span class="text-blue-500 italic">РОСТА.</span>
-        </h1>
-        <p
-          class="text-zinc-400 text-sm md:text-lg max-w-2xl mx-auto mb-10 font-light opacity-80"
-        >
-          Founder OS — это архитектура процессов, которая превращает хаос
-          стартапа в предсказуемую машину для масштабирования.
-        </p>
-        <button
-          onclick="lenis.scrollTo('#contact')"
-          class="pointer-events-auto bg-white text-black px-8 py-4 md:px-10 md:py-5 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all"
-        >
-          Записаться на созвон
-        </button>
+    <div id="main-scroller" style="height: 800vh">
+      <div
+        class="section-container z-[50]"
+        id="s-hero"
+        style="opacity: 1; filter: blur(0px)"
+      >
+        <div class="flex flex-col items-center px-4 text-center">
+          <div
+            class="mb-4 text-[8px] font-bold tracking-[0.4em] text-blue-500 uppercase border border-blue-500/30 px-4 py-1.5 rounded-full"
+          >
+            Build. Scale. Repeat.
+          </div>
+          <h1 class="hero-title">
+            Операционная <br />
+            система <br />
+            <span class="text-blue-600">роста.</span>
+          </h1>
+          <p
+            class="mt-6 text-zinc-500 text-xs max-w-[280px] font-medium leading-relaxed"
+          >
+            Архитектура процессов для масштабирования вашего стартапа.
+          </p>
+          <button
+            onclick="lenis.scrollTo('#s-form')"
+            class="pointer-events-auto mt-8 bg-white text-black px-8 py-4 rounded-full font-bold uppercase text-[10px] tracking-widest active:scale-95 transition-all"
+          >
+            Записаться
+          </button>
+        </div>
       </div>
-    </div>
 
-    <main class="relative z-[100] bg-black">
-      <section id="modules" class="py-24 px-6 max-w-7xl mx-auto">
-        <h2
-          class="text-3xl md:text-5xl font-bold mb-16 tracking-tighter text-center md:text-left uppercase italic"
-        >
-          Архитектура системы
-        </h2>
-
-        <div class="bento-grid">
-          <div class="bento-item col-span-2">
-            <h3 class="text-xl md:text-2xl font-bold mb-4">
-              Strategy & Vision
-            </h3>
-            <p class="text-zinc-400 text-sm md:text-base max-w-sm">
-              Формируем ДНК продукта и дорожную карту на 24 месяца вперед.
-            </p>
-            <div class="step-number">01</div>
-          </div>
-          <div class="bento-item">
-            <h3 class="text-xl md:text-2xl font-bold mb-4">Growth</h3>
-            <p class="text-zinc-400 text-sm">
-              Механики виральности и каналы захвата рынка.
-            </p>
-            <div class="step-number">02</div>
-          </div>
-          <div class="bento-item">
-            <h3 class="text-xl md:text-2xl font-bold mb-4">Operations</h3>
-            <p class="text-zinc-400 text-sm">
-              Автоматизация рутины и найм топ-талантов.
-            </p>
-            <div class="step-number">03</div>
-          </div>
-          <div class="bento-item col-span-2 bg-blue-600/5 border-blue-500/20">
-            <h3 class="text-xl md:text-2xl font-bold mb-4 text-blue-400">
-              Product Ecosystem
-            </h3>
-            <p class="text-zinc-400 text-sm md:text-base max-w-md">
-              Создаем продукт, который пользователи рекомендуют сами, снижая
-              стоимость привлечения.
-            </p>
-            <div class="step-number">04</div>
+      <div class="section-container" id="s-bento">
+        <div class="w-full max-w-[320px] px-4">
+          <h2 class="text-xl font-bold mb-6 italic uppercase text-blue-500">
+            Архитектура
+          </h2>
+          <div class="space-y-3">
+            <div class="bento-item">
+              <h3 class="font-bold">Strategy</h3>
+              <p class="text-[10px] text-zinc-500">
+                Дорожная карта на 24 месяца.
+              </p>
+            </div>
+            <div class="bento-item">
+              <h3 class="font-bold">Growth</h3>
+              <p class="text-[10px] text-zinc-500">Каналы захвата рынка.</p>
+            </div>
+            <div class="bento-item bg-blue-600/10 border-blue-500/20">
+              <h3 class="font-bold text-blue-400">Ecosystem</h3>
+              <p class="text-[10px] text-zinc-400">
+                Продукт, который растет сам.
+              </p>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section id="contact" class="py-24 px-6">
+      <div class="section-container" id="s-form">
         <div
-          class="max-w-xl mx-auto bg-zinc-950 p-8 md:p-12 rounded-[32px] md:rounded-[40px] border border-white/5 shadow-2xl"
+          class="bento-item w-full max-w-[300px] pointer-events-auto bg-black/80 backdrop-blur-xl"
         >
           <h2
-            class="text-3xl md:text-4xl font-black mb-4 tracking-tighter uppercase italic text-center md:text-left"
+            class="text-2xl font-black mb-4 italic uppercase tracking-tighter"
           >
             Масштабируемся?
           </h2>
-          <p
-            class="text-zinc-500 mb-8 text-xs md:text-sm text-center md:text-left"
-          >
-            Оставьте заявку, и мы проведем аудит вашей текущей системы роста.
-          </p>
-          <form class="space-y-4">
+          <form class="space-y-3">
             <input type="text" placeholder="Имя" class="input-field" />
-            <input type="text" placeholder="Компания" class="input-field" />
             <input
               type="text"
               placeholder="Telegram / Email"
               class="input-field"
             />
             <button
-              class="w-full bg-white text-black py-4 md:py-5 rounded-2xl font-black text-xs md:text-sm tracking-widest uppercase hover:bg-blue-600 hover:text-white transition-all"
+              type="button"
+              class="w-full bg-white text-black py-4 rounded-xl font-black uppercase text-[10px] tracking-widest active:scale-95 transition-all"
             >
-              ОТПРАВИТЬ
+              Отправить
             </button>
           </form>
         </div>
-      </section>
-    </main>
+      </div>
+    </div>
 
     <footer
-      class="py-20 px-10 text-center bg-black relative z-[100] border-t border-white/5"
+      class="relative z-[2000] bg-black pt-20 pb-10 px-4 border-t border-white/5 overflow-hidden"
     >
-      <h2
-        class="text-[12vw] font-black italic tracking-tighter leading-none mb-8 text-blue-600 uppercase opacity-10"
-      >
-        Founder OS.
-      </h2>
-      <p class="text-[9px] uppercase tracking-[1em] opacity-30">
-        © 2026 Beyond the Future
-      </p>
+      <div class="flex flex-col items-center text-center">
+        <div class="footer-bg-text mb-4">FOUNDER OS.</div>
+        <div class="space-y-6">
+          <button
+            onclick="lenis.scrollTo('#s-form')"
+            class="bg-blue-600 text-white px-10 py-4 rounded-full font-bold text-[10px] tracking-widest uppercase shadow-lg shadow-blue-600/20"
+          >
+            Начать рост
+          </button>
+          <p class="opacity-20 text-[8px] font-bold tracking-[1.5em] uppercase">
+            Beyond the Future 2026
+          </p>
+        </div>
+      </div>
     </footer>
 
     <script>
-      // Плавный скролл
       const lenis = new Lenis({ duration: 1.2 });
       function raf(time) {
         lenis.raf(time);
@@ -277,44 +214,31 @@
       }
       requestAnimationFrame(raf);
 
-      // Свечение за курсором (только для десктопа)
-      const glow = document.getElementById("glow");
-      if (window.innerWidth > 768) {
-        window.addEventListener("mousemove", (e) => {
-          gsap.to(glow, { x: e.clientX, y: e.clientY, duration: 0.8 });
-        });
-      }
-
       gsap.registerPlugin(ScrollTrigger);
-
-      // Анимация Hero-секции при скролле
-      gsap.to("#hero-section", {
+      const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: "#hero-trigger",
+          trigger: "#main-scroller",
           start: "top top",
-          end: "bottom top",
-          scrub: true,
+          end: "bottom bottom",
+          scrub: 1,
         },
-        opacity: 0,
-        scale: 0.9,
-        filter: "blur(20px)",
-        y: -50,
       });
 
-      // Появление элементов Bento
-      gsap.utils.toArray(".bento-item").forEach((item) => {
-        gsap.from(item, {
-          scrollTrigger: {
-            trigger: item,
-            start: "top 85%",
-            toggleActions: "play none none reverse",
-          },
-          y: 30,
-          opacity: 0,
-          duration: 0.8,
-          ease: "power2.out",
-        });
+      // Плавные переходы между секциями
+      tl.to("#s-hero", {
+        opacity: 0,
+        scale: 0.8,
+        filter: "blur(30px)",
+        pointerEvents: "none",
+        duration: 2,
       });
+      tl.to("#s-bento", { opacity: 1, filter: "blur(0px)", duration: 2 });
+      tl.to(
+        "#s-bento",
+        { opacity: 0, y: -50, filter: "blur(30px)", duration: 2 },
+        "+=1"
+      );
+      tl.to("#s-form", { opacity: 1, filter: "blur(0px)", duration: 2 });
     </script>
   </body>
 </html>
