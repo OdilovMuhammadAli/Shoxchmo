@@ -1,269 +1,251 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>NEXUS | Future of Mobile</title>
+    <title>NEXUS | THE INFINITE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap");
-
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap");
       body {
         background: #000;
         color: #fff;
-        overflow-x: hidden;
         font-family: "Inter", sans-serif;
-        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
       }
 
-      /* 3D Сцена */
-      .viewport {
-        perspective: 1200px;
-        height: 100vh;
-        width: 100%;
-        position: sticky;
+      .section-container {
+        position: fixed;
         top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+        opacity: 0;
+        transform-style: preserve-3d;
+      }
+
+      .huge-text {
+        font-size: 25vw;
+        line-height: 0.7;
+        letter-spacing: -0.06em;
+        text-transform: uppercase;
+        text-align: center;
+        font-weight: 900;
+      }
+
+      .media-box {
+        width: 70vw;
+        height: 40vh;
+        position: relative;
+        overflow: hidden;
+        border-radius: 30px;
+        box-shadow: 0 50px 100px rgba(0, 0, 0, 0.5);
+      }
+
+      .chip-box {
+        width: 300px;
+        height: 300px;
+        background: linear-gradient(135deg, #333, #000);
+        border: 2px solid #555;
+        border-radius: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 80px rgba(255, 170, 0, 0.2);
+      }
+
+      .laptop {
+        transform-style: preserve-3d;
+        width: 500px;
+        height: 320px;
+      }
+      .lid {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        background: #0a0a0a;
+        border: 1px solid #333;
+        border-radius: 12px;
+        transform-origin: bottom;
+        transform: rotateX(-90deg);
         overflow: hidden;
       }
 
-      .scene {
-        transform-style: preserve-3d;
-        width: 100%;
-        height: 100%;
-        position: relative;
-      }
-
-      /* Стиль полноценных карточек товаров */
-      .product-card {
-        position: absolute;
-        transform-style: preserve-3d;
-        background: linear-gradient(
-          145deg,
-          rgba(255, 255, 255, 0.05) 0%,
-          rgba(255, 255, 255, 0.01) 100%
-        );
-        backdrop-filter: blur(25px);
+      .glass-card {
+        background: rgba(255, 255, 255, 0.03);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 40px;
-        padding: 40px;
-        box-shadow: 0 50px 100px rgba(0, 0, 0, 0.8);
-      }
-
-      /* Текстовые блоки в пространстве */
-      .floating-text {
-        position: absolute;
-        transform-style: preserve-3d;
-        pointer-events: none;
-      }
-
-      .gradient-text {
-        background: linear-gradient(to bottom, #fff, #444);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-
-      /* Сетка на фоне */
-      .grid-bg {
-        position: absolute;
-        width: 200%;
-        height: 200%;
-        background-image: radial-gradient(
-          circle,
-          rgba(255, 255, 255, 0.05) 1px,
-          transparent 1px
-        );
-        background-size: 60px 60px;
-        transform: rotateX(70deg) translateZ(-400px);
-        top: -50%;
-        left: -50%;
-        mask-image: radial-gradient(circle, black, transparent 70%);
-      }
-
-      /* Кнопка "Купить" */
-      .btn-premium {
-        background: #fff;
-        color: #000;
-        padding: 12px 24px;
-        border-radius: 100px;
-        font-weight: 700;
-        font-size: 12px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        transition: all 0.3s;
-      }
-      .btn-premium:hover {
-        transform: scale(1.05);
-        background: #3b82f6;
-        color: #fff;
+        backdrop-filter: blur(20px);
+        border-radius: 30px;
+        padding: 30px;
       }
     </style>
   </head>
   <body>
     <nav
-      class="fixed top-0 w-full z-[100] p-8 flex justify-between items-center mix-blend-difference"
+      class="fixed top-0 w-full z-[1000] p-10 flex justify-between items-center mix-blend-difference"
     >
-      <div class="font-black text-2xl tracking-tighter">NEXUS</div>
+      <div class="font-black text-2xl tracking-tighter uppercase">Nexus</div>
       <div
-        class="flex gap-10 text-[10px] uppercase font-bold tracking-[0.3em] opacity-60"
+        class="hidden md:flex gap-12 text-[9px] font-bold tracking-[0.5em] uppercase opacity-40"
       >
-        <a href="#">iPhone</a><a href="#">Watch</a><a href="#">MacBook</a>
-      </div>
-      <div
-        class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center"
-      >
-        🛒
+        <a href="#">Studio</a><a href="#">Performance</a><a href="#">Specs</a>
       </div>
     </nav>
 
-    <div style="height: 1000vh">
-      <div class="viewport">
-        <div class="grid-bg"></div>
+    <div id="main-scroller" style="height: 1800vh">
+      <div class="section-container" id="s-intro">
+        <h1 class="huge-text italic">PURE<br />FORCE</h1>
+      </div>
 
-        <div class="scene">
-          <div
-            class="floating-text absolute inset-0 flex flex-col items-center justify-center text-center"
-          >
-            <h1
-              class="text-[12vw] font-black leading-none uppercase tracking-tighter italic gradient-text"
-            >
-              TITANIUM<br />ERA
-            </h1>
-            <p
-              class="text-white/20 tracking-[1.5em] text-[10px] mt-10 uppercase"
-            >
-              Scroll to enter the future
-            </p>
+      <div class="section-container" id="s-chip">
+        <div class="absolute huge-text text-white/[0.03]" id="chip-bg-text">
+          M4 MAX
+        </div>
+        <div class="chip-box" id="chip-model">
+          <span class="text-6xl font-black text-amber-500 shadow-lg">M4</span>
+        </div>
+      </div>
+
+      <div class="section-container" id="s-ipad">
+        <div class="flex flex-col items-center">
+          <div class="media-box" id="ipad-vid">
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/S2p8E4atWyk?autoplay=1&mute=1&loop=1&playlist=S2p8E4atWyk&controls=0"
+              frameborder="0"
+              class="scale-110"
+            ></iframe>
           </div>
+          <h2 class="text-8xl font-black mt-10 italic">iPAD PRO.</h2>
+        </div>
+      </div>
 
+      <div class="section-container" id="s-gallery">
+        <div class="grid grid-cols-3 gap-8 w-[120vw]" id="gallery-grid">
+          <div class="glass-card h-64 flex items-center justify-center">
+            <img src="./picture/iphonee.jpg" class="h-full object-contain" />
+          </div>
+          <div class="glass-card h-80 flex items-center justify-center">
+            <img src="./picture/ipad.jpg" class="h-full object-contain" />
+          </div>
+          <div class="glass-card h-64 flex items-center justify-center">
+            <img src="./picture/iphonee.jpg" class="h-full object-contain" />
+          </div>
           <div
-            class="product-card w-[350px] h-[550px]"
-            style="top: 10%; left: 10%; transform: translateZ(-2500px)"
+            class="glass-card h-96 mt-[-40px] flex items-center justify-center"
           >
-            <div class="flex flex-col h-full justify-between">
-              <div>
-                <span
-                  class="text-blue-500 font-bold text-[10px] tracking-widest uppercase italic"
-                  >The New Standard</span
-                >
-                <h2 class="text-5xl font-black mt-2 tracking-tighter">
-                  iPhone 15 Pro
-                </h2>
-              </div>
-              <div
-                class="flex-grow my-8 rounded-2xl bg-gradient-to-br from-zinc-800 to-black border border-white/5 flex items-center justify-center overflow-hidden"
-              >
-                <img
-                  src="./picture/iphonee.jpg"
-                  class="w-full h-full object-cover opacity-60"
-                  alt="iphone"
-                />
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-xl font-light">$999</span>
-                <button class="btn-premium">Explore</button>
-              </div>
+            <h3 class="text-4xl font-black">STAY NEXT.</h3>
+          </div>
+          <div class="glass-card h-64 flex items-center justify-center">
+            <img
+              src="./picture/Fluid-Lines.webp"
+              class="h-full object-contain"
+            />
+          </div>
+          <div
+            class="glass-card h-80 mt-[-20px] flex items-center justify-center"
+          >
+            <img src="./picture/iphonee.jpg" class="h-full object-contain" />
+          </div>
+        </div>
+      </div>
+
+      <div class="section-container" id="s-mac">
+        <div class="flex flex-col items-center">
+          <div class="laptop">
+            <div class="lid" id="mac-lid">
+              <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/S2p8E4atWyk?autoplay=1&mute=1&loop=1&playlist=S2p8E4atWyk&controls=0"
+                frameborder="0"
+              ></iframe>
             </div>
-          </div>
-
-          <div
-            class="product-card w-[300px] h-[400px]"
-            style="top: 55%; right: 5%; transform: translateZ(-1200px)"
-          >
-            <div class="flex flex-col h-full">
-              <h3 class="text-3xl font-black tracking-tighter">
-                Watch Ultra 2
-              </h3>
-              <p
-                class="text-white/40 text-[11px] mt-2 uppercase tracking-widest"
-              >
-                Rugged & Capable
-              </p>
-              <div class="flex-grow flex items-center justify-center my-6">
-                <img
-                  src="./picture/Fluid-Lines.webp"
-                  class="w-32 h-32 rounded-full object-cover border-2 border-orange-500 shadow-[0_0_30px_rgba(249,115,22,0.3)]"
-                  alt="watch"
-                />
-              </div>
-              <button class="btn-premium w-full">Order Now</button>
-            </div>
-          </div>
-
-          <div
-            class="floating-text w-full text-center"
-            style="top: 30%; left: 0%; transform: translateZ(-4500px)"
-          >
-            <h4 class="text-[15vw] font-black text-white/5 uppercase">
-              MacBook Pro
-            </h4>
-            <p class="text-white/10 text-xl tracking-[1em] mt-4 uppercase">
-              Mind-blowing. Head-turning.
-            </p>
-          </div>
-
-          <div
-            class="product-card w-[450px] h-[250px] flex items-center gap-8"
-            style="top: 75%; left: 20%; transform: translateZ(-6000px)"
-          >
             <div
-              class="w-32 h-32 rounded-3xl bg-zinc-900 border border-white/10 flex items-center justify-center text-4xl"
-            >
-              <img class="rounded-3xl" src="./picture/OIP.webp" alt="" />
-            </div>
-            <div>
-              <h3 class="text-3xl font-black italic">AirPods Max</h3>
-              <p
-                class="text-white/40 text-[10px] mt-2 uppercase tracking-widest"
-              >
-                High-fidelity audio.
-              </p>
-              <p
-                class="text-white/40 text-[10px] uppercase tracking-widest mb-6 underline"
-              >
-                Spatial Audio
-              </p>
-              <button class="btn-premium px-6 py-2">Buy</button>
-            </div>
+              class="h-3 bg-zinc-800 w-full absolute bottom-[-13px] rounded-b-xl border-t border-white/5"
+            ></div>
           </div>
-
-          <div
-            class="floating-text border-l-2 border-blue-500 pl-6"
-            style="top: 40%; left: 60%; transform: translateZ(-3500px)"
-          >
-            <p class="text-4xl font-bold tracking-tighter italic">
-              A17 Pro Chip
-            </p>
-            <p class="text-sm opacity-40 uppercase tracking-widest">
-              First in the industry.
-            </p>
-          </div>
+          <h2 class="text-6xl font-black mt-20 italic">MACBOOK PRO</h2>
         </div>
       </div>
     </div>
 
-    <section
-      class="h-screen bg-white text-black flex items-center justify-center relative z-[50] rounded-t-[5rem]"
+    <footer
+      class="relative z-[1000] bg-white text-black pt-32 pb-10 px-10 rounded-t-[5vw]"
     >
-      <div class="text-center">
-        <h2
-          class="text-[8vw] font-black tracking-tighter leading-none mb-10 italic"
-        >
-          PICK YOUR NEXT.<br /><span class="text-blue-600">NEXUS.</span>
-        </h2>
+      <div class="max-w-7xl mx-auto">
         <div
-          class="flex gap-6 justify-center uppercase font-black text-[10px] tracking-widest"
+          class="flex flex-col md:flex-row justify-between items-start mb-20"
         >
-          <a href="#" class="border-b-2 border-black">Compare Models</a>
-          <a href="#" class="opacity-30">Retail Stores</a>
+          <h2
+            class="text-[10vw] font-black leading-none tracking-tighter uppercase italic"
+          >
+            NEXUS.
+          </h2>
+          <div class="mt-10 md:mt-0">
+            <p class="text-2xl font-bold max-w-sm mb-8">
+              Engineering for those who define the future.
+            </p>
+            <button
+              class="bg-black text-white px-12 py-6 rounded-full font-black uppercase text-xs tracking-[0.3em]"
+            >
+              Order Now
+            </button>
+          </div>
         </div>
+
+        <div
+          class="grid grid-cols-2 md:grid-cols-4 gap-10 border-t border-zinc-200 pt-20"
+        >
+          <div class="space-y-4">
+            <p class="font-black uppercase text-[10px] text-zinc-400">
+              Products
+            </p>
+            <p>iPhone</p>
+            <p>Mac</p>
+            <p>Watch</p>
+          </div>
+          <div class="space-y-4">
+            <p class="font-black uppercase text-[10px] text-zinc-400">
+              Company
+            </p>
+            <p>About</p>
+            <p>Careers</p>
+            <p>Ethics</p>
+          </div>
+          <div class="space-y-4">
+            <p class="font-black uppercase text-[10px] text-zinc-400">
+              Support
+            </p>
+            <p>Community</p>
+            <p>Warranty</p>
+            <p>Help</p>
+          </div>
+          <div class="space-y-4 text-right">
+            <p class="font-black uppercase text-[10px] text-zinc-400">Social</p>
+            <p>Instagram</p>
+            <p>X / Twitter</p>
+            <p>LinkedIn</p>
+          </div>
+        </div>
+        <p
+          class="mt-20 text-center text-[10px] font-bold opacity-20 tracking-[2em]"
+        >
+          NEXUS SYSTEMS 2026
+        </p>
       </div>
-    </section>
+    </footer>
 
     <script>
-      // Инициализация плавного скролла
-      const lenis = new Lenis({ duration: 1.5 });
+      const lenis = new Lenis({ duration: 1.8 });
       function raf(time) {
         lenis.raf(time);
         requestAnimationFrame(raf);
@@ -272,60 +254,55 @@
 
       gsap.registerPlugin(ScrollTrigger);
 
-      // ДВИЖЕНИЕ КАМЕРЫ СКВОЗЬ СЦЕНУ
-      gsap.to(".scene", {
-        z: 7500, // Летим вперед
-        ease: "none",
+      const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: "body",
+          trigger: "#main-scroller",
           start: "top top",
           end: "bottom bottom",
           scrub: 1,
         },
       });
 
-      // Анимация текста Hero
-      gsap.to(".hero-title", {
-        scale: 0.5,
+      // 1. INTRO
+      tl.to("#s-intro", { opacity: 1, duration: 1 }).to("#s-intro h1", {
+        scale: 15,
         opacity: 0,
-        scrollTrigger: {
-          trigger: "body",
-          start: "top top",
-          end: "10% top",
-          scrub: true,
-        },
+        duration: 3,
+        ease: "power2.in",
       });
 
-      // Вращение карточек при полете для 3D объема
-      document.querySelectorAll(".product-card").forEach((card, i) => {
-        gsap.to(card, {
-          rotateY: i % 2 === 0 ? 30 : -30,
-          rotateX: 10,
-          scrollTrigger: {
-            trigger: "body",
-            start: "top top",
-            end: "bottom bottom",
-            scrub: 2,
-          },
-        });
-      });
+      // 2. CHIP MACRO
+      tl.to("#s-chip", { opacity: 1, duration: 1 }, "-=1")
+        .from("#chip-model", { scale: 0.2, rotateY: 180, duration: 2 })
+        .to("#chip-bg-text", { scale: 3, opacity: 0.1, duration: 2 }, "-=1")
+        .to("#s-chip", { scale: 10, opacity: 0, duration: 2.5 });
 
-      // Создаем пылинки (эффект воздуха)
-      for (let i = 0; i < 80; i++) {
-        const p = document.createElement("div");
-        p.style.cssText = `position:absolute; width:1px; height:1px; background:#fff; left:${
-          Math.random() * 100
-        }%; top:${Math.random() * 100}%; opacity:0.2;`;
-        document.querySelector(".scene").appendChild(p);
-        gsap.fromTo(
-          p,
-          { z: -Math.random() * 10000 },
-          {
-            z: 1000,
-            scrollTrigger: { trigger: "body", scrub: Math.random() * 2 },
-          }
-        );
-      }
+      // 3. iPAD
+      tl.to("#s-ipad", { opacity: 1, duration: 1 })
+        .from("#ipad-vid", { y: 800, rotateX: -45, duration: 2 })
+        .to("#s-ipad", { x: -2000, opacity: 0, duration: 2, delay: 0.5 });
+
+      // 4. GALLERY EXPLOSION
+      tl.to("#s-gallery", { opacity: 1, duration: 1 })
+        .from("#gallery-grid div", {
+          z: -5000,
+          opacity: 0,
+          stagger: 0.1,
+          duration: 3,
+        })
+        .to("#gallery-grid", { scale: 4, opacity: 0, duration: 3 });
+
+      // 5. MACBOOK
+      tl.to("#s-mac", { opacity: 1, duration: 1 })
+        .to("#mac-lid", { rotateX: 0, duration: 2.5 })
+        .to("#s-mac", { scale: 0.8, opacity: 0, duration: 2, delay: 0.5 });
+
+      // Mouse Parallax
+      window.addEventListener("mousemove", (e) => {
+        const x = (e.clientX / window.innerWidth - 0.5) * 20;
+        const y = (e.clientY / window.innerHeight - 0.5) * 20;
+        gsap.to(".section-container", { x: x, y: y, duration: 1.5 });
+      });
     </script>
   </body>
 </html>
