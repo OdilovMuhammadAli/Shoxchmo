@@ -3,129 +3,167 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FOUNDER OS | THE ULTIMATE SYSTEM</title>
-    <link rel="stylesheet" href="./style.css" />
+    <title>Founder OS | The System</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap");
+
+      :root {
+        --bg: #000000;
+        --accent: #3b82f6;
+        --glass: rgba(255, 255, 255, 0.03);
+        --border: rgba(255, 255, 255, 0.08);
+      }
+
+      body {
+        background-color: var(--bg);
+        color: #fff;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        overflow-x: hidden;
+      }
+
+      /* Фиксированные контейнеры для первой части */
+      .section-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+        opacity: 0;
+        filter: blur(20px);
+      }
+
+      .hero-title {
+        font-size: clamp(3rem, 8vw, 7rem);
+        font-weight: 800;
+        line-height: 0.9;
+        letter-spacing: -0.05em;
+        text-align: center;
+      }
+
+      /* Эффект свечения и сетки */
+      .cursor-glow {
+        position: fixed;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(
+          circle,
+          rgba(59, 130, 246, 0.07) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 0;
+        transform: translate(-50%, -50%);
+      }
+      .grid-canvas {
+        position: fixed;
+        inset: 0;
+        background-image: linear-gradient(var(--border) 1px, transparent 1px),
+          linear-gradient(90deg, var(--border) 1px, transparent 1px);
+        background-size: 60px 60px;
+        mask-image: radial-gradient(circle at center, black, transparent 80%);
+        z-index: -1;
+        opacity: 0.5;
+      }
+
+      /* Стили для Bento и Форм */
+      .bento-item {
+        background: var(--glass);
+        border: 1px solid var(--border);
+        border-radius: 32px;
+        padding: 40px;
+        position: relative;
+        overflow: hidden;
+      }
+      .step-number {
+        font-size: 120px;
+        font-weight: 800;
+        position: absolute;
+        right: -20px;
+        bottom: -40px;
+        opacity: 0.03;
+      }
+      .input-field {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 20px;
+        width: 100%;
+        outline: none;
+        color: white;
+      }
+
+      /* Стили MacBook */
+      .laptop {
+        transform-style: preserve-3d;
+        width: 500px;
+        height: 320px;
+        position: relative;
+      }
+      .lid {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        background: #0a0a0a;
+        border: 1px solid #333;
+        border-radius: 12px;
+        transform-origin: bottom;
+        transform: rotateX(-90deg);
+        overflow: hidden;
+      }
+    </style>
   </head>
   <body>
+    <div class="cursor-glow" id="glow"></div>
+    <div class="grid-canvas"></div>
+
     <nav
-      class="fixed top-0 w-full z-[1000] p-10 flex justify-between items-center mix-blend-difference"
+      class="fixed top-0 w-full z-[1000] p-8 flex justify-between items-center backdrop-blur-md mix-blend-difference"
     >
-      <div class="font-black text-2xl tracking-tighter uppercase">
-        FOUNDER OS
+      <div class="text-xl font-bold tracking-tighter">
+        FOUNDER<span class="text-blue-500">OS</span>
       </div>
       <div
-        class="hidden md:flex gap-12 text-[9px] font-bold tracking-[0.5em] uppercase opacity-40"
+        class="flex gap-8 text-xs font-semibold uppercase tracking-widest opacity-50"
       >
-        <a href="#">О системе</a><a href="#">Модули</a><a href="#">Контакт</a>
+        <a href="#modules">Модули</a><a href="#contact">Контакт</a>
       </div>
     </nav>
 
-    <div id="main-scroller" style="height: 2500vh">
+    <div id="main-scroller" style="height: 1200vh">
       <div
-        class="section-container"
+        class="section-container z-[50]"
         id="s-hero"
         style="opacity: 1; filter: blur(0px)"
       >
-        <div class="flex flex-col items-center px-6">
-          <div
-            class="mb-6 text-[10px] font-bold tracking-[0.4em] text-blue-500 uppercase border border-blue-500/30 px-5 py-1.5 rounded-full"
+        <div class="text-center max-w-5xl">
+          <span
+            class="inline-block px-4 py-1 border border-blue-500/30 rounded-full text-[10px] font-bold tracking-[0.3em] text-blue-400 mb-8 uppercase"
+            >Build. Scale. Repeat.</span
           >
-            Build. Scale. Repeat.
-          </div>
-          <h1 class="hero-title">
+          <h1 class="hero-title mb-8">
             ОПЕРАЦИОННАЯ <br />
-            СИСТЕМА ДЛЯ <br />
-            <span class="text-blue-600">РОСТА.</span>
+            СИСТЕМА ДЛЯ <span class="text-blue-500">РОСТА.</span>
           </h1>
-          <p
-            class="mt-8 text-zinc-500 max-w-2xl text-center text-lg leading-relaxed"
-          >
+          <p class="text-zinc-400 text-lg max-w-2xl mx-auto mb-12 font-light">
             Founder OS — это архитектура процессов, которая превращает хаос
             стартапа в предсказуемую машину для масштабирования.
           </p>
           <button
-            class="mt-12 bg-white text-black px-10 py-5 rounded-full font-black uppercase text-[11px] tracking-widest hover:bg-blue-600 hover:text-white transition-all"
+            onclick="lenis.scrollTo('#contact')"
+            class="pointer-events-auto bg-white text-black px-10 py-5 rounded-full font-bold text-sm hover:bg-blue-500 hover:text-white transition-all"
           >
             Записаться на созвон
           </button>
-        </div>
-      </div>
-
-      <div class="section-container" id="s-explode">
-        <div class="relative w-[450px] h-[600px]" id="explode-group">
-          <div
-            class="exploded-layer bg-zinc-800 border border-white/10"
-            id="lay-1"
-          ></div>
-          <div
-            class="exploded-layer flex items-center justify-center bg-blue-600/5 border border-blue-500/20 backdrop-blur-md"
-            id="lay-2"
-          >
-            <div
-              class="w-20 h-20 bg-blue-600 rounded-3xl flex items-center justify-center font-black"
-            >
-              OS
-            </div>
-          </div>
-          <div
-            class="exploded-layer overflow-hidden border border-white/20"
-            id="lay-3"
-          >
-            <video
-              autoplay
-              muted
-              loop
-              playsinline
-              class="w-full h-full object-cover"
-            >
-              <source
-                src="https://www.apple.com/105/media/us/ipad-pro/2024/4dcca390-0fca-4933-b1bc-1d13f9694b8e/anim/hero/large_2x.mp4"
-                type="video/mp4"
-              />
-            </video>
-          </div>
-        </div>
-      </div>
-
-      <div class="section-container" id="s-chip">
-        <div class="chip-box" id="chip-model">
-          <span class="text-6xl font-black text-blue-500 italic">OS</span>
-        </div>
-      </div>
-
-      <div class="section-container" id="s-gallery">
-        <div class="grid grid-cols-3 gap-7 w-[90vw]" id="gallery-grid">
-          <div
-            class="glass-card h-96 mt-[-40px] flex items-center justify-center bg-blue-600"
-          >
-            <h3
-              class="text-4xl font-black tracking-tighter uppercase italic text-center"
-            >
-              Strategy
-            </h3>
-          </div>
-          <div
-            class="glass-card h-96 mt-[-40px] flex items-center justify-center bg-black-600"
-          >
-            <h3
-              class="text-4xl font-black tracking-tighter uppercase italic text-center"
-            >
-              Growth
-            </h3>
-          </div>
-          <div
-            class="glass-card h-96 mt-[-40px] flex items-center justify-center bg-blue-600"
-          >
-            <h3
-              class="text-4xl font-black tracking-tighter uppercase italic text-center"
-            >
-              Analytics
-            </h3>
-          </div>
         </div>
       </div>
 
@@ -150,59 +188,142 @@
               class="h-3 bg-zinc-800 w-full absolute bottom-[-13px] rounded-b-xl border-t border-white/5"
             ></div>
           </div>
-          <h2 class="text-6xl font-black mt-20 italic">FOUNDER SYSTEM</h2>
-        </div>
-      </div>
-
-      <div class="section-container" id="s-form">
-        <div
-          class="glass-card w-[480px] p-12 pointer-events-auto bg-black/60 border-white/5"
-        >
-          <h2
-            class="text-4xl font-black mb-10 italic uppercase leading-none tracking-tighter"
-          >
-            МАСШТАБИРУЙТЕСЬ <br />
-            С НАМИ
-          </h2>
-          <form class="space-y-4">
-            <input type="text" placeholder="Имя" class="form-input" />
-            <input type="text" placeholder="Компания" class="form-input" />
-            <input
-              type="text"
-              placeholder="Telegram / Email"
-              class="form-input"
-            />
-            <textarea
-              placeholder="Ваш стартап и цели"
-              rows="3"
-              class="form-input"
-            ></textarea>
-            <button
-              type="button"
-              class="w-full bg-white text-black py-5 mt-4 rounded-full font-black uppercase text-[12px] tracking-widest hover:bg-blue-600 hover:text-white transition-all"
-            >
-              ОТПРАВИТЬ ЗАЯВКУ
-            </button>
-          </form>
         </div>
       </div>
     </div>
 
-    <footer
-      class="relative z-[1000] bg-black pt-40 pb-20 px-10 border-t border-white/5"
-    >
-      <div class="max-w-7xl mx-auto flex flex-col items-center text-center">
+    <main class="relative z-[100] bg-black">
+      <section id="modules" class="py-32 px-6 max-w-7xl mx-auto">
         <h2
-          class="text-[12vw] font-black italic tracking-tighter leading-none mb-12 text-blue-600 uppercase"
+          class="text-4xl font-bold mb-20 tracking-tighter text-center md:text-left"
         >
-          Founder OS.
+          АРХИТЕКТУРА СИСТЕМЫ
         </h2>
-        <p class="mt-20 opacity-20 text-[10px] font-bold tracking-[2em]">
-          BEYOND THE FUTURE 2026
-        </p>
-      </div>
+        <div class="flex flex-col md:grid md:grid-cols-3 gap-6">
+          <div class="bento-item col-span-2 group">
+            <h3 class="text-2xl font-bold mb-4">Strategy & Vision</h3>
+            <p class="text-zinc-400 max-w-sm">
+              Формируем ДНК продукта и дорожную карту на 24 месяца вперед.
+            </p>
+            <div class="step-number">01</div>
+          </div>
+          <div class="bento-item group">
+            <h3 class="text-2xl font-bold mb-4">Growth</h3>
+            <p class="text-zinc-400">
+              Механики виральности и каналы захвата рынка.
+            </p>
+            <div class="step-number">02</div>
+          </div>
+          <div class="bento-item group">
+            <h3 class="text-2xl font-bold mb-4">Operations</h3>
+            <p class="text-zinc-400">
+              Автоматизация рутины и найм топ-талантов.
+            </p>
+            <div class="step-number">03</div>
+          </div>
+          <div
+            class="bento-item col-span-2 group bg-blue-600/5 border-blue-500/20"
+          >
+            <h3 class="text-2xl font-bold mb-4">Product Ecosystem</h3>
+            <p class="text-zinc-400 max-w-md">
+              Создаем продукт, который пользователи рекомендуют сами.
+            </p>
+            <div class="step-number">04</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="py-32 px-6">
+        <div
+          class="max-w-xl mx-auto bg-zinc-900/40 p-12 rounded-[40px] border border-white/5 backdrop-blur-3xl"
+        >
+          <h2 class="text-3xl font-bold mb-2 tracking-tighter uppercase italic">
+            Масштабируемся?
+          </h2>
+          <p class="text-zinc-500 mb-10 text-sm">
+            Оставьте заявку для аудита вашей системы.
+          </p>
+          <form class="space-y-4">
+            <input type="text" placeholder="Имя" class="input-field" />
+            <input type="text" placeholder="Компания" class="input-field" />
+            <input type="text" placeholder="Telegram" class="input-field" />
+            <button
+              class="w-full bg-white text-black py-5 rounded-2xl font-black text-sm tracking-widest uppercase hover:bg-blue-600 hover:text-white transition-all"
+            >
+              ОТПРАВИТЬ
+            </button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer
+      class="p-20 text-center border-t border-white/5 bg-black relative z-[100]"
+    >
+      <h2
+        class="text-[10vw] font-black italic tracking-tighter leading-none mb-10 text-blue-600 uppercase opacity-20"
+      >
+        Founder OS.
+      </h2>
+      <p class="text-[10px] uppercase tracking-[0.5em] opacity-40">
+        © 2026 BEYOND THE LIMITS
+      </p>
     </footer>
 
-    <script src="./app.js"></script>
+    <script>
+      const lenis = new Lenis({ duration: 1.5 });
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+
+      // Свечение за курсором
+      const glow = document.getElementById("glow");
+      window.addEventListener("mousemove", (e) => {
+        gsap.to(glow, { x: e.clientX, y: e.clientY, duration: 1 });
+      });
+
+      gsap.registerPlugin(ScrollTrigger);
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#main-scroller",
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1,
+        },
+      });
+
+      // 1. Уход Hero
+      tl.to("#s-hero", {
+        y: -100,
+        opacity: 0,
+        filter: "blur(40px)",
+        pointerEvents: "none",
+        duration: 2,
+      });
+
+      // 2. Появление и открытие MacBook
+      tl.to("#s-mac", { opacity: 1, filter: "blur(0px)", duration: 2 })
+        .to("#mac-lid", { rotateX: 0, duration: 4 })
+        .to("#s-mac", {
+          scale: 0.5,
+          y: -200,
+          opacity: 0,
+          filter: "blur(40px)",
+          duration: 3,
+        });
+
+      // Анимация Bento блоков
+      gsap.utils.toArray(".bento-item").forEach((item) => {
+        gsap.from(item, {
+          scrollTrigger: { trigger: item, start: "top 90%" },
+          y: 50,
+          opacity: 0,
+          duration: 1,
+          ease: "power4.out",
+        });
+      });
+    </script>
   </body>
 </html>

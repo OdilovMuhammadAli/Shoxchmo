@@ -15,6 +15,7 @@ const tl = gsap.timeline({
   },
 });
 
+// Плавный уход Hero (Первый экран теперь виден сразу)
 tl.to("#s-hero", {
   y: -100,
   opacity: 0,
@@ -22,6 +23,7 @@ tl.to("#s-hero", {
   duration: 2,
 });
 
+// Оригинальные анимации Nexus
 tl.to("#s-explode", { opacity: 1, filter: "blur(0px)", duration: 1.5 })
   .from("#lay-1", { z: -1500, duration: 3 }, "-=1")
   .from("#lay-2", { z: -800, duration: 3 }, "-=2.5")
