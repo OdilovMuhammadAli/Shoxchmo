@@ -2,28 +2,32 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <title>Antigravity 3D Real</title>
+    <title>AERIS | Antigravity Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
 
     <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;400;900&display=swap");
+
       body {
         background: #000;
         color: #fff;
         overflow-x: hidden;
-        font-family: sans-serif;
+        font-family: "Inter", sans-serif;
       }
 
-      /* Контейнер для 3D */
       .viewport {
-        perspective: 1000px; /* Глубина 3D */
+        perspective: 1200px;
         height: 100vh;
         width: 100%;
         position: sticky;
         top: 0;
         overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .scene {
@@ -33,74 +37,149 @@
         position: relative;
       }
 
+      /* Стиль карточек-гаджетов */
       .gadget {
         position: absolute;
         transform-style: preserve-3d;
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.05) 0%,
+          rgba(255, 255, 255, 0.01) 100%
+        );
+        backdrop-filter: blur(20px);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-        text-transform: uppercase;
-        font-size: 10px;
-        letter-spacing: 2px;
+        border-radius: 40px;
+        padding: 2rem;
+        box-shadow: 0 50px 100px rgba(0, 0, 0, 0.8);
+      }
+
+      /* Футуристическая сетка */
+      .grid-plane {
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        background-image: linear-gradient(
+            rgba(59, 130, 246, 0.1) 1px,
+            transparent 1px
+          ),
+          linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+        background-size: 100px 100px;
+        transform: rotateX(90deg) translateZ(-500px);
+        transform-origin: center;
+      }
+
+      /* Пылинки/частицы в воздухе */
+      .particle {
+        position: absolute;
+        background: white;
+        border-radius: 50%;
+        opacity: 0.3;
       }
     </style>
   </head>
   <body>
-    <div style="height: 500vh">
+    <div style="height: 800vh">
       <div class="viewport">
+        <div class="grid-plane top-[-50%] left-[-50%]"></div>
+
         <div class="scene">
           <div
-            class="main-text absolute inset-0 flex items-center justify-center text-center"
+            class="main-text absolute inset-0 flex flex-col items-center justify-center text-center"
           >
             <h1
-              class="text-[10vw] font-black leading-none uppercase tracking-tighter"
+              class="text-[12vw] font-black leading-none uppercase tracking-tighter italic"
             >
-              AERIS<br /><span class="opacity-20">ANTIGRAVITY</span>
+              AERIS<br /><span class="text-blue-500">M1</span>
             </h1>
+            <p class="text-white/20 tracking-[1.5em] text-xs mt-10 uppercase">
+              The future of modular tech
+            </p>
           </div>
 
           <div
-            class="gadget w-64 h-80"
-            style="top: 20%; left: 10%; transform: translateZ(-1500px)"
+            class="gadget w-72 h-[450px]"
+            style="top: 10%; left: 15%; transform: translateZ(-2000px)"
           >
-            Gadget 01
+            <div class="h-full flex flex-col justify-between">
+              <div
+                class="w-10 h-10 bg-blue-500 rounded-full blur-xl opacity-50"
+              ></div>
+              <div>
+                <p class="text-[10px] text-blue-400 font-mono mb-2">
+                  // LIQUID RETINA
+                </p>
+                <h2 class="text-3xl font-light">Vision Pro</h2>
+              </div>
+            </div>
           </div>
+
           <div
-            class="gadget w-80 h-48"
-            style="top: 50%; right: 5%; transform: translateZ(-2500px)"
+            class="gadget w-48 h-48 border-blue-500/50"
+            style="
+              top: 60%;
+              right: 20%;
+              transform: translateZ(-1000px) rotateY(-20deg);
+            "
           >
-            Gadget 02
+            <div
+              class="flex flex-col items-center justify-center h-full text-center"
+            >
+              <div class="text-4xl mb-4">⚡</div>
+              <p class="text-[10px] opacity-40 uppercase">A18 Bionic</p>
+            </div>
           </div>
+
           <div
-            class="gadget w-40 h-40 rounded-full"
-            style="top: 70%; left: 20%; transform: translateZ(-1000px)"
+            class="gadget border-none bg-transparent shadow-none w-[400px]"
+            style="top: 40%; left: 50%; transform: translateZ(-3500px)"
           >
-            Nexus
+            <h3 class="text-6xl font-bold text-white/10 uppercase">
+              Ultrafast<br />Wireless
+            </h3>
           </div>
+
           <div
-            class="gadget w-56 h-72"
-            style="top: 10%; right: 20%; transform: translateZ(-3500px)"
+            class="gadget w-64 h-64 rounded-full"
+            style="top: 75%; left: 10%; transform: translateZ(-4500px)"
           >
-            Sensor
+            <div
+              class="h-full flex items-center justify-center border-4 border-white/5 rounded-full"
+            >
+              <div class="w-10 h-10 bg-white/10 rounded-full"></div>
+            </div>
           </div>
+
           <div
-            class="gadget w-96 h-96"
-            style="top: 40%; left: 40%; transform: translateZ(-5000px)"
+            class="gadget w-[500px] h-20 flex items-center justify-center"
+            style="top: 20%; right: 30%; transform: translateZ(-6000px)"
           >
-            Core Unit
+            <p class="tracking-[2em] text-[10px] opacity-20">SYSTEM ONLINE</p>
           </div>
         </div>
       </div>
     </div>
 
+    <section
+      class="h-screen bg-white text-black flex items-center justify-center relative z-50 overflow-hidden"
+    >
+      <div class="text-center">
+        <h2 class="text-7xl font-black tracking-tighter mb-8">
+          OWN THE FUTURE.
+        </h2>
+        <button
+          class="px-12 py-5 bg-black text-white rounded-full text-xs font-bold tracking-[0.3em] hover:bg-blue-600 transition-colors"
+        >
+          PRE-ORDER NOW
+        </button>
+      </div>
+    </section>
+
     <script>
-      // Плавный скролл
-      const lenis = new Lenis();
+      // Плавный скролл (Lenis)
+      const lenis = new Lenis({
+        duration: 2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      });
       function raf(time) {
         lenis.raf(time);
         requestAnimationFrame(raf);
@@ -109,9 +188,9 @@
 
       gsap.registerPlugin(ScrollTrigger);
 
-      // АНИМАЦИЯ ПОЛЕТА СКВОЗЬ ЭЛЕМЕНТЫ
+      // Полет камеры (Двигаем сцену на нас)
       gsap.to(".scene", {
-        z: 5000, // Двигаем всю сцену на камеру
+        z: 7000,
         ease: "none",
         scrollTrigger: {
           trigger: "body",
@@ -121,24 +200,36 @@
         },
       });
 
-      // Анимация текста (растворение при приближении)
-      gsap.to(".main-text", {
-        scale: 2,
-        opacity: 0,
-        z: 500,
+      // Анимация сетки (пол движется навстречу)
+      gsap.to(".grid-plane", {
+        z: 1000,
+        opacity: 0.5,
         scrollTrigger: {
           trigger: "body",
           start: "top top",
-          end: "20% top",
-          scrub: 1,
+          end: "bottom bottom",
+          scrub: 0.5,
         },
       });
 
-      // Добавляем индивидуальное вращение каждому гаджету
-      document.querySelectorAll(".gadget").forEach((item) => {
+      // Текст исчезает красиво
+      gsap.to(".main-text", {
+        scale: 0.5,
+        opacity: 0,
+        z: 200,
+        scrollTrigger: {
+          trigger: "body",
+          start: "top top",
+          end: "15% top",
+          scrub: true,
+        },
+      });
+
+      // Вращение гаджетов для эффекта 3D
+      document.querySelectorAll(".gadget").forEach((item, i) => {
         gsap.to(item, {
-          rotateY: 360,
-          rotateX: 180,
+          rotateY: i % 2 === 0 ? 45 : -45,
+          rotateX: i % 2 === 0 ? 20 : -20,
           scrollTrigger: {
             trigger: "body",
             start: "top top",
@@ -147,6 +238,32 @@
           },
         });
       });
+
+      // Создаем пылинки
+      for (let i = 0; i < 100; i++) {
+        const p = document.createElement("div");
+        p.className = "particle";
+        const size = Math.random() * 3 + "px";
+        p.style.width = size;
+        p.style.height = size;
+        p.style.left = Math.random() * 100 + "%";
+        p.style.top = Math.random() * 100 + "%";
+        document.querySelector(".scene").appendChild(p);
+
+        gsap.fromTo(
+          p,
+          { z: -Math.random() * 8000 },
+          {
+            z: 1000,
+            scrollTrigger: {
+              trigger: "body",
+              start: "top top",
+              end: "bottom bottom",
+              scrub: Math.random() * 2,
+            },
+          }
+        );
+      }
     </script>
   </body>
 </html>
