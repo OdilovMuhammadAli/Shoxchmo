@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NEXUS | THE ULTIMATE DARK</title>
+    <title>FOUNDER OS | THE ULTIMATE SYSTEM</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -29,27 +29,18 @@
         pointer-events: none;
         opacity: 0;
         transform-style: preserve-3d;
-        /* Изначально все размыто */
         filter: blur(20px);
         will-change: filter, transform, opacity;
       }
 
-      .huge-text {
-        font-size: 25vw;
-        line-height: 0.7;
-        letter-spacing: -0.06em;
+      /* Главный заголовок */
+      .hero-title {
+        font-size: clamp(3rem, 9vw, 8.5rem);
+        line-height: 0.85;
+        font-weight: 900;
+        letter-spacing: -0.05em;
         text-transform: uppercase;
         text-align: center;
-        font-weight: 900;
-      }
-
-      .media-box {
-        width: 70vw;
-        height: 40vh;
-        position: relative;
-        overflow: hidden;
-        border-radius: 30px;
-        box-shadow: 0 50px 100px rgba(0, 0, 0, 0.8);
       }
 
       .exploded-layer {
@@ -75,6 +66,7 @@
         transform-style: preserve-3d;
         width: 500px;
         height: 320px;
+        position: relative;
       }
       .lid {
         position: absolute;
@@ -89,7 +81,6 @@
         overflow: hidden;
       }
 
-      /* Стиль для карточек галереи */
       .glass-card {
         background: rgba(255, 255, 255, 0.03);
         border: 1px solid rgba(255, 255, 255, 0.1);
@@ -105,10 +96,20 @@
         opacity: 0.8;
       }
 
-      /* Черный футер */
-      .black-footer {
-        background: #000;
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
+      /* Стили формы */
+      .form-input {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 18px;
+        border-radius: 14px;
+        color: white;
+        width: 100%;
+        outline: none;
+        pointer-events: auto;
+        font-size: 16px;
+      }
+      .form-input::placeholder {
+        color: rgba(255, 255, 255, 0.3);
       }
     </style>
   </head>
@@ -116,17 +117,45 @@
     <nav
       class="fixed top-0 w-full z-[1000] p-10 flex justify-between items-center mix-blend-difference"
     >
-      <div class="font-black text-2xl tracking-tighter uppercase">Nexus</div>
+      <div class="font-black text-2xl tracking-tighter uppercase">
+        FOUNDER OS
+      </div>
       <div
         class="hidden md:flex gap-12 text-[9px] font-bold tracking-[0.5em] uppercase opacity-40"
       >
-        <a href="#">Studio</a><a href="#">Performance</a><a href="#">Specs</a>
+        <a href="#">О системе</a><a href="#">Модули</a><a href="#">Контакт</a>
       </div>
     </nav>
 
-    <div id="main-scroller" style="height: 2000vh">
-      <div class="section-container" id="s-intro">
-        <h1 class="huge-text italic">PURE<br />FORCE</h1>
+    <div id="main-scroller" style="height: 2500vh">
+      <div
+        class="section-container"
+        id="s-hero"
+        style="opacity: 1; filter: blur(0px)"
+      >
+        <div class="flex flex-col items-center px-6">
+          <div
+            class="mb-6 text-[10px] font-bold tracking-[0.4em] text-blue-500 uppercase border border-blue-500/30 px-5 py-1.5 rounded-full"
+          >
+            Build. Scale. Repeat.
+          </div>
+          <h1 class="hero-title">
+            ОПЕРАЦИОННАЯ <br />
+            СИСТЕМА ДЛЯ <br />
+            <span class="text-blue-600">РОСТА.</span>
+          </h1>
+          <p
+            class="mt-8 text-zinc-500 max-w-2xl text-center text-lg leading-relaxed"
+          >
+            Founder OS — это архитектура процессов, которая превращает хаос
+            стартапа в предсказуемую машину для масштабирования.
+          </p>
+          <button
+            class="mt-12 bg-white text-black px-10 py-5 rounded-full font-black uppercase text-[11px] tracking-widest hover:bg-blue-600 hover:text-white transition-all"
+          >
+            Записаться на созвон
+          </button>
+        </div>
       </div>
 
       <div class="section-container" id="s-explode">
@@ -142,7 +171,7 @@
             <div
               class="w-20 h-20 bg-blue-600 rounded-3xl flex items-center justify-center font-black"
             >
-              M4
+              OS
             </div>
           </div>
           <div
@@ -166,30 +195,30 @@
       </div>
 
       <div class="section-container" id="s-chip">
-        <div class="absolute huge-text text-white/[0.03]" id="chip-bg-text">
-          M4 MAX
-        </div>
         <div class="chip-box" id="chip-model">
-          <span class="text-6xl font-black text-amber-500 shadow-lg">M4</span>
+          <span class="text-6xl font-black text-blue-500 italic">OS</span>
         </div>
       </div>
 
       <div class="section-container" id="s-gallery">
-        <div class="grid grid-cols-3 gap-8 w-[120vw]" id="gallery-grid">
-          <div class="glass-card h-64">
-            <img
-              src="https://images.unsplash.com/photo-1510557880182-3d4d3cba3f21?q=80&w=2070&auto=format&fit=crop"
-            />
+        <div class="grid grid-cols-3 gap-7 w-[90vw]" id="gallery-grid">
+          <div
+            class="glass-card h-96 mt-[-40px] flex items-center justify-center bg-blue-600"
+          >
+            <h3
+              class="text-4xl font-black tracking-tighter uppercase italic text-center"
+            >
+              Strategy
+            </h3>
           </div>
-          <div class="glass-card h-80">
-            <img
-              src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?q=80&w=2030&auto=format&fit=crop"
-            />
-          </div>
-          <div class="glass-card h-64">
-            <img
-              src="https://images.unsplash.com/photo-1556656793-062ff9878273?q=80&w=2070&auto=format&fit=crop"
-            />
+          <div
+            class="glass-card h-96 mt-[-40px] flex items-center justify-center bg-black-600"
+          >
+            <h3
+              class="text-4xl font-black tracking-tighter uppercase italic text-center"
+            >
+              Growth
+            </h3>
           </div>
           <div
             class="glass-card h-96 mt-[-40px] flex items-center justify-center bg-blue-600"
@@ -197,18 +226,8 @@
             <h3
               class="text-4xl font-black tracking-tighter uppercase italic text-center"
             >
-              Stay Next.
+              Analytics
             </h3>
-          </div>
-          <div class="glass-card h-64">
-            <img
-              src="https://images.unsplash.com/photo-1591337676887-a217a6970c8a?q=80&w=1780&auto=format&fit=crop"
-            />
-          </div>
-          <div class="glass-card h-80 mt-[-20px]">
-            <img
-              src="https://images.unsplash.com/photo-1616348436168-de43ad0db179?q=80&w=1981&auto=format&fit=crop"
-            />
           </div>
         </div>
       </div>
@@ -234,25 +253,53 @@
               class="h-3 bg-zinc-800 w-full absolute bottom-[-13px] rounded-b-xl border-t border-white/5"
             ></div>
           </div>
-          <h2 class="text-6xl font-black mt-20 italic">MACBOOK PRO</h2>
+          <h2 class="text-6xl font-black mt-20 italic">FOUNDER SYSTEM</h2>
+        </div>
+      </div>
+
+      <div class="section-container" id="s-form">
+        <div
+          class="glass-card w-[480px] p-12 pointer-events-auto bg-black/60 border-white/5"
+        >
+          <h2
+            class="text-4xl font-black mb-10 italic uppercase leading-none tracking-tighter"
+          >
+            МАСШТАБИРУЙТЕСЬ <br />
+            С НАМИ
+          </h2>
+          <form class="space-y-4">
+            <input type="text" placeholder="Имя" class="form-input" />
+            <input type="text" placeholder="Компания" class="form-input" />
+            <input
+              type="text"
+              placeholder="Telegram / Email"
+              class="form-input"
+            />
+            <textarea
+              placeholder="Ваш стартап и цели"
+              rows="3"
+              class="form-input"
+            ></textarea>
+            <button
+              type="button"
+              class="w-full bg-white text-black py-5 mt-4 rounded-full font-black uppercase text-[12px] tracking-widest hover:bg-blue-600 hover:text-white transition-all"
+            >
+              ОТПРАВИТЬ ЗАЯВКУ
+            </button>
+          </form>
         </div>
       </div>
     </div>
 
     <footer
-      class="relative z-[1000] black-footer pt-40 pb-20 px-10 rounded-t-[5vw]"
+      class="relative z-[1000] bg-black pt-40 pb-20 px-10 border-t border-white/5"
     >
       <div class="max-w-7xl mx-auto flex flex-col items-center text-center">
         <h2
-          class="text-[12vw] font-black italic tracking-tighter leading-none mb-12 text-blue-600"
+          class="text-[12vw] font-black italic tracking-tighter leading-none mb-12 text-blue-600 uppercase"
         >
-          NEXUS.
+          Founder OS.
         </h2>
-        <button
-          class="bg-white text-black px-16 py-6 rounded-full font-black uppercase text-xs tracking-[0.3em] hover:bg-blue-600 hover:text-white transition-all duration-500"
-        >
-          Order Now
-        </button>
         <p class="mt-20 opacity-20 text-[10px] font-bold tracking-[2em]">
           BEYOND THE FUTURE 2026
         </p>
@@ -277,13 +324,15 @@
         },
       });
 
-      // 1. INTRO
-      tl.to("#s-intro", { opacity: 1, filter: "blur(0px)", duration: 1 }).to(
-        "#s-intro h1",
-        { scale: 15, opacity: 0, duration: 3, ease: "power2.in" }
-      );
+      // Плавный уход Hero (Первый экран теперь виден сразу)
+      tl.to("#s-hero", {
+        y: -100,
+        opacity: 0,
+        filter: "blur(40px)",
+        duration: 2,
+      });
 
-      // 2. EXPLODE iPAD (Вход: из блюра в четкость -> Анимация -> Выход: в блюр)
+      // Оригинальные анимации Nexus
       tl.to("#s-explode", { opacity: 1, filter: "blur(0px)", duration: 1.5 })
         .from("#lay-1", { z: -1500, duration: 3 }, "-=1")
         .from("#lay-2", { z: -800, duration: 3 }, "-=2.5")
@@ -297,10 +346,8 @@
           duration: 2.5,
         });
 
-      // 3. CHIP MACRO
       tl.to("#s-chip", { opacity: 1, filter: "blur(0px)", duration: 1 })
         .from("#chip-model", { scale: 0.2, rotateY: 180, duration: 2 })
-        .to("#chip-bg-text", { scale: 3, opacity: 0.1, duration: 2 }, "-=1")
         .to("#s-chip", {
           scale: 10,
           opacity: 0,
@@ -308,22 +355,20 @@
           duration: 2.5,
         });
 
-      // 4. GALLERY EXPLOSION (Анимация для карточек)
-      tl.to("#s-gallery", { opacity: 1, filter: "blur(0px)", duration: 1.5 }) // Вход в фокус
+      tl.to("#s-gallery", { opacity: 1, filter: "blur(0px)", duration: 1.5 })
         .from("#gallery-grid div", {
           z: -5000,
           stagger: 0.1,
           duration: 4,
           ease: "back.out(1)",
-        }) // Разлет ("взрыв")
+        })
         .to("#gallery-grid", {
           scale: 4,
           opacity: 0,
           filter: "blur(40px)",
           duration: 3.5,
-        }); // Выход в сильный блюр
+        });
 
-      // 5. MACBOOK
       tl.to("#s-mac", { opacity: 1, filter: "blur(0px)", duration: 1.5 })
         .to("#mac-lid", { rotateX: 0, duration: 3 })
         .to("#s-mac", {
@@ -331,10 +376,13 @@
           opacity: 0,
           filter: "blur(20px)",
           duration: 2,
-          delay: 0.5,
         });
 
-      // Mouse Parallax
+      tl.to("#s-form", { opacity: 1, filter: "blur(0px)", duration: 1.5 }).from(
+        "#s-form .glass-card",
+        { y: 200, opacity: 0, duration: 2 }
+      );
+
       window.addEventListener("mousemove", (e) => {
         const x = (e.clientX / window.innerWidth - 0.5) * 20;
         const y = (e.clientY / window.innerHeight - 0.5) * 20;
